@@ -1,0 +1,88 @@
+@use '../.././../styles/constants/colors';
+
+@mixin dropdownTypeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+.questionHeader {
+  display: flex;
+  align-items: center;
+}
+
+.question {
+  width: 100%;
+  max-width: 450px;
+  padding: 15px;
+  background: colors.$GRAY_00;
+  border-bottom: 1px solid colors.$GRAY_03;
+
+  &::placeholder {
+    color: colors.$GRAY_03;
+  }
+}
+
+.dropdownBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+  margin-left: 10px;
+  background: colors.$WHITE;
+  border: 1px solid colors.$GRAY_02;
+  border-radius: 3px;
+}
+
+.selectedType {
+  width: 100%;
+  height: 100%;
+
+  button {
+    @include dropdownTypeButton;
+
+    p {
+      margin-left: 5px;
+    }
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: colors.$WHITE;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 10%);
+
+  li {
+    width: 200px;
+    height: 40px;
+
+    &[data-select='true'] {
+      top: 0;
+    }
+
+    button {
+      @include dropdownTypeButton;
+      transition: 0.1s;
+
+      &:hover {
+        background: colors.$GRAY_01;
+      }
+
+      p {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.dropdownIcon {
+  width: 15px;
+  height: 15px;
+}
