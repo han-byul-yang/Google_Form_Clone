@@ -1,5 +1,6 @@
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 
+import useClickOutside from 'hooks/useClickOutside'
 import ContainerBox from 'components/ContainerBox'
 
 import { CheckBoxIcon, CircleIcon, DropdownIcon, ParagraphIcon, ShortTextIcon } from 'assets/svgs'
@@ -19,6 +20,16 @@ const Question = () => {
   const [questionInput, setQuestionInput] = useState('제목 없는 질문')
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
   const [selectedDropdownType, setSelectedDropdownType] = useState({ type: '객관식 질문', order: 2 })
+  const containerRef = useRef(null)
+
+  const clickOutsideHandle = () => {
+    setIsOpenDropdown(false)
+  }
+  const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
+
+  useEffect(() => {
+    clickOutsideEvent()
+  }, [clickOutsideEvent])
 
   const handleQuestionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuestionInput(e.currentTarget.value)
@@ -59,7 +70,7 @@ const Question = () => {
             </button>
           </p>
           {isOpenDropdown && (
-            <ul className={styles.dropdown} style={{ top: -(selectedDropdownType.order * 40) }}>
+            <ul className={styles.dropdown} ref={containerRef} style={{ top: -(selectedDropdownType.order * 40) }}>
               {questionTypes.map((type, index) => {
                 const typeKey = `typeKey-${index}`
 
