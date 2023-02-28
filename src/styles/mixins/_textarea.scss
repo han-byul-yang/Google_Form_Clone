@@ -1,0 +1,12 @@
+@use '../constants/colors';
+
+@mixin textarea {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  line-height: 12px;
+  resize: none;
+  border: none;
+  border-bottom: 1px solid colors.$GRAY_02;
+}
