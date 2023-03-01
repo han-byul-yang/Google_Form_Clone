@@ -1,0 +1,23 @@
+@use '../../../../styles/constants/colors';
+
+@mixin questionText {
+  font-size: 14px;
+  line-height: 30px;
+  color: colors.$GRAY_04;
+}
+
+.textTypeBox {
+  margin: 20px 0;
+}
+
+.shortText {
+  @include questionText;
+  max-width: 300px;
+  border-bottom: 1px dotted colors.$GRAY_03;
+}
+
+.longText {
+  @include questionText;
+  max-width: 500px;
+  border-bottom: 1px dotted colors.$GRAY_03;
+}

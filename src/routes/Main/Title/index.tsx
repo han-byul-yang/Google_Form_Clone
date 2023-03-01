@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 
-import ContainerBox from 'components/ContainerBox'
+import FormContainerBox from 'components/FormContainerBox'
 
 import styles from './title.module.scss'
 
@@ -23,7 +23,7 @@ const Title = () => {
   }
 
   return (
-    <ContainerBox boxType='title'>
+    <FormContainerBox boxType='title'>
       <textarea
         className={styles.title}
         name='title'
@@ -39,7 +39,7 @@ const Title = () => {
         value={descriptionInput}
         onChange={handleDescriptionInputChange}
       />
-    </ContainerBox>
+    </FormContainerBox>
   )
 }
 

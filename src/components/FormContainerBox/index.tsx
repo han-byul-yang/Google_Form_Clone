@@ -1,23 +1,23 @@
 import { ReactElement } from 'react'
 import cx from 'classnames'
 
-import styles from './containerBox.module.scss'
+import styles from './formContainerBox.module.scss'
 
-interface ContainerBoxProps {
+interface FormContainerBoxProps {
   children: ReactElement | ReactElement[]
   boxType: string
 }
 
-const ContainerBox = ({ children, boxType }: ContainerBoxProps) => {
+const FormContainerBox = ({ children, boxType }: FormContainerBoxProps) => {
   return (
-    <div
+    <form
       className={cx(styles.containerBox, {
         [styles.titleBox]: boxType === 'title',
       })}
     >
       {children}
-    </div>
+    </form>
   )
 }
 
-export default ContainerBox
+export default FormContainerBox
