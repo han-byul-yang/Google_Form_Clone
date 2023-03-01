@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import useClickOutside from 'hooks/useClickOutside'
+import { RootState } from 'store'
 import { addType } from 'store/questionSlice'
 
 import { CheckBoxIcon, DropdownIcon, FullCircleIcon, ParagraphIcon, ShortTextIcon } from 'assets/svgs'
@@ -22,8 +23,8 @@ const dropdownIcons = (type: string) =>
   }[type])
 
 const FormDropdown = ({ formIndex }: FormDropdownProps) => {
-  const [selectedDropdownType, setSelectedDropdownType] = useState({ type: '객관식 질문', order: 2 })
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
+  const { type: selectedDropdownType } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
   const containerRef = useRef(null)
 
@@ -41,8 +42,7 @@ const FormDropdown = ({ formIndex }: FormDropdownProps) => {
   }
 
   const handleTypeDropdownClick = (type: string, order: number) => {
-    setSelectedDropdownType({ type, order })
-    dispatch(addType({ index: formIndex, type }))
+    dispatch(addType({ index: formIndex, type: { name: type, order } }))
     setIsOpenDropdown(false)
   }
 
@@ -59,7 +59,7 @@ const FormDropdown = ({ formIndex }: FormDropdownProps) => {
     <div className={styles.dropdownBox}>
       <p className={styles.selectedType}>
         <button type='button' onClick={handleOpenDropdownClick}>
-          {dropdownTypeItem(selectedDropdownType.type)}
+          {dropdownTypeItem(selectedDropdownType.name)}
         </button>
       </p>
       {isOpenDropdown && (

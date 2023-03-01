@@ -1,10 +1,14 @@
 import { ChangeEvent, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { RootState } from 'store'
+import { addEtcOption, addOption, deleteEtcOption, deleteOption, editOption } from 'store/questionSlice'
 
 import { CircleIcon, CheckBoxOutlineIcon, DropdownIcon, XIcon } from 'assets/svgs'
 import styles from './questionChoosing.module.scss'
 
 interface QuestionChoosingProps {
-  questionType: string
+  formIndex: number
 }
 
 const optionTypeIcons = (option: string) =>
@@ -14,39 +18,37 @@ const optionTypeIcons = (option: string) =>
     드롭다운: <DropdownIcon className={styles.optionTypeIcon} />,
   }[option])
 
-const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
-  const [optionsInput, setOptionsInput] = useState([{ name: '옵션1', value: '옵션1' }])
+const QuestionChoosing = ({ formIndex }: QuestionChoosingProps) => {
   const [isAddEtcOption, setIsAddEtcOption] = useState(false)
+  const { type: questionType, options: optionsInput } = useSelector(
+    (state: RootState) => state.question.questionInfos[formIndex]
+  )
+  const dispatch = useDispatch()
   const optionCountRef = useRef(1)
 
   const handleOptionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget
-    setOptionsInput((prevOptions) =>
-      prevOptions.map((prevOption) => {
-        if (prevOption.name === name) return { ...prevOption, value }
-        return prevOption
-      })
-    )
+    dispatch(editOption({ index: formIndex, option: { name, value } }))
   }
 
   const handleDeleteOptionClick = (name: string) => {
-    setOptionsInput((prevOptions) => prevOptions.filter((prevOption) => prevOption.name !== name))
+    dispatch(deleteOption({ index: formIndex, name }))
   }
 
   const handleDeleteEtcClick = () => {
     setIsAddEtcOption(false)
+    dispatch(deleteEtcOption({ index: formIndex }))
   }
 
   const handleAddOptionClick = () => {
     optionCountRef.current += 1
-    setOptionsInput((prevOptions) => [
-      ...prevOptions,
-      { name: `옵션${optionCountRef.current}`, value: `옵션${optionCountRef.current}` },
-    ])
+    const option = { name: `옵션${optionCountRef.current}`, value: `옵션${optionCountRef.current}` }
+    dispatch(addOption({ index: formIndex, option, etcOption: isAddEtcOption }))
   }
 
   const handleAddEtcClick = () => {
     setIsAddEtcOption(true)
+    dispatch(addEtcOption({ index: formIndex }))
   }
 
   return (
@@ -57,7 +59,7 @@ const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
           return (
             <li key={optionKey}>
               <div className={styles.optionInput}>
-                {optionTypeIcons(questionType)}
+                {optionTypeIcons(questionType.name)}
                 <input type='text' name={option.name} value={option.value} onChange={handleOptionInputChange} />
               </div>
               {(optionsInput.length !== 1 || index !== 0) && (
@@ -68,14 +70,14 @@ const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
         })}
         {isAddEtcOption && (
           <li className={styles.etcOption}>
-            {optionTypeIcons(questionType)}
+            {optionTypeIcons(questionType.name)}
             <p>기타...</p>
             <XIcon className={styles.xIcon} onClick={handleDeleteEtcClick} />
           </li>
         )}
       </ul>
       <p className={styles.addOptions}>
-        {optionTypeIcons(questionType)}
+        {optionTypeIcons(questionType.name)}
         <button type='button' className={styles.addOption} onClick={handleAddOptionClick}>
           옵션 추가
         </button>

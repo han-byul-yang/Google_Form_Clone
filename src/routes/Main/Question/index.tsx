@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'store'
@@ -6,21 +6,22 @@ import { addTitle } from 'store/questionSlice'
 import FormDropdown from 'components/FormDropdown'
 import QuestionWriting from './QuestionWriting'
 import QuestionChoosing from './QuestionChoosing'
+import QuestionFooter from './QuestionFooter'
 
 import styles from './question.module.scss'
 
 interface QuestionProps {
-  formIndex?: number
+  questionInfoIndex: number
 }
 
-const Question = ({ formIndex = 0 }: QuestionProps) => {
-  const [questionTitleInput, setQuestionTitleInput] = useState('제목 없는 질문')
-  const questionType = useSelector((state: RootState) => state.question.questionInfos[formIndex].type)
+const Question = ({ questionInfoIndex: formIndex }: QuestionProps) => {
+  const { type: questionType, title: questionTitle } = useSelector(
+    (state: RootState) => state.question.questionInfos[formIndex]
+  )
   const dispatch = useDispatch()
 
   const handleQuestionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuestionTitleInput(e.currentTarget.value)
-    dispatch(addTitle({ index: formIndex, title: questionTitleInput }))
+    dispatch(addTitle({ index: formIndex, title: e.currentTarget.value }))
   }
 
   return (
@@ -29,16 +30,17 @@ const Question = ({ formIndex = 0 }: QuestionProps) => {
         <input
           className={styles.question}
           placeholder='질문'
-          value={questionTitleInput}
+          value={questionTitle}
           onChange={handleQuestionInputChange}
         />
         <FormDropdown formIndex={formIndex} />
       </div>
-      {questionType === '단답형' || questionType === '장문형' ? (
-        <QuestionWriting questionType={questionType} />
+      {questionType.name === '단답형' || questionType.name === '장문형' ? (
+        <QuestionWriting formIndex={formIndex} />
       ) : (
-        <QuestionChoosing questionType={questionType} />
+        <QuestionChoosing formIndex={formIndex} />
       )}
+      <QuestionFooter formIndex={formIndex} />
     </form>
   )
 }
