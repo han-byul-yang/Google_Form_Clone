@@ -16,6 +16,7 @@
   li {
     display: flex;
     align-items: center;
+    margin-top: 5px;
 
     input {
       display: block;
@@ -54,6 +55,13 @@
 .xIcon {
   width: 20px;
   height: 20px;
+  padding: 2px;
+  cursor: pointer;
+
+  &:hover {
+    background: colors.$BACKGROUND;
+    border-radius: 50%;
+  }
 }
 
 .addOptions {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 
 import { CircleIcon, CheckBoxOutlineIcon, DropdownIcon, XIcon } from 'assets/svgs'
 import styles from './questionChoosing.module.scss'
@@ -15,11 +15,34 @@ const optionTypeIcons = (option: string) =>
   }[option])
 
 const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
-  const [options, setOptions] = useState(['옵션1'])
+  const [optionsInput, setOptionsInput] = useState([{ name: '옵션1', value: '옵션1' }])
   const [isAddEtcOption, setIsAddEtcOption] = useState(false)
+  const optionCountRef = useRef(1)
+
+  const handleOptionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.currentTarget
+    setOptionsInput((prevOptions) =>
+      prevOptions.map((prevOption) => {
+        if (prevOption.name === name) return { ...prevOption, value }
+        return prevOption
+      })
+    )
+  }
+
+  const handleDeleteOptionClick = (name: string) => {
+    setOptionsInput((prevOptions) => prevOptions.filter((prevOption) => prevOption.name !== name))
+  }
+
+  const handleDeleteEtcClick = () => {
+    setIsAddEtcOption(false)
+  }
 
   const handleAddOptionClick = () => {
-    setOptions((prevOptions) => [...prevOptions, `옵션${prevOptions.length + 1}`])
+    optionCountRef.current += 1
+    setOptionsInput((prevOptions) => [
+      ...prevOptions,
+      { name: `옵션${optionCountRef.current}`, value: `옵션${optionCountRef.current}` },
+    ])
   }
 
   const handleAddEtcClick = () => {
@@ -29,15 +52,15 @@ const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
   return (
     <div className={styles.optionTypeBox}>
       <ul className={styles.options}>
-        {options.map((option, index) => {
+        {optionsInput.map((option, index) => {
           const optionKey = `option-${index}`
           return (
             <li key={optionKey}>
               <div className={styles.optionInput}>
                 {optionTypeIcons(questionType)}
-                <input type='text' value={option} />
+                <input type='text' name={option.name} value={option.value} onChange={handleOptionInputChange} />
               </div>
-              <XIcon className={styles.xIcon} />
+              {index !== 0 && <XIcon className={styles.xIcon} onClick={() => handleDeleteOptionClick(option.name)} />}
             </li>
           )
         })}
@@ -45,7 +68,7 @@ const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
           <li className={styles.etcOption}>
             {optionTypeIcons(questionType)}
             <p>기타...</p>
-            <XIcon className={styles.xIcon} />
+            <XIcon className={styles.xIcon} onClick={handleDeleteEtcClick} />
           </li>
         )}
       </ul>
