@@ -1,0 +1,23 @@
+@use '../../styles/mixins/form';
+@use '../../styles/constants/colors';
+
+.titlePreview {
+  @include form.titleForm;
+}
+
+.title {
+  padding: 10px 10px 5px;
+  font-size: 30px;
+}
+
+.description {
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid colors.$GRAY_02;
+}
+
+.essentialItem {
+  padding: 10px 10px 2px;
+  font-size: 13px;
+  color: colors.$NOTICE;
+}
