@@ -25,15 +25,22 @@ const QuestionFooter = ({ formIndex }: QuestionFooterProps) => {
 
   const handleEssentialFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.currentTarget
-    if (checked) dispatch(setEssential({ index: formIndex }))
+    dispatch(setEssential({ index: formIndex, essential: checked }))
   }
 
   return (
     <div className={styles.formFooter}>
       <CopyIcon className={styles.footerIcon} onClick={handleCopyFormClick} />
       <TrashIcon className={styles.footerIcon} onClick={handleDeleteFormClick} />
-      <input id='toggle' type='checkbox' className={styles.input} onChange={handleEssentialFormChange} />
-      <label htmlFor='toggle' className={styles.label} />
+      <input
+        id={`${formIndex}`}
+        type='checkbox'
+        className={styles.input}
+        name={`${formIndex}`}
+        checked={questionInfos.essential}
+        onChange={handleEssentialFormChange}
+      />
+      <label htmlFor={`${formIndex}`} className={styles.label} />
     </div>
   )
 }
