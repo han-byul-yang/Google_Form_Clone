@@ -60,7 +60,9 @@ const QuestionChoosing = ({ questionType }: QuestionChoosingProps) => {
                 {optionTypeIcons(questionType)}
                 <input type='text' name={option.name} value={option.value} onChange={handleOptionInputChange} />
               </div>
-              {index !== 0 && <XIcon className={styles.xIcon} onClick={() => handleDeleteOptionClick(option.name)} />}
+              {(optionsInput.length !== 1 || index !== 0) && (
+                <XIcon className={styles.xIcon} onClick={() => handleDeleteOptionClick(option.name)} />
+              )}
             </li>
           )
         })}
