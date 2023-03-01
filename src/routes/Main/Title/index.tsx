@@ -1,17 +1,21 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { RootState } from 'store'
+import { addDescription, addTitle } from 'store/titleSlice'
 
 import styles from './title.module.scss'
 
 const Title = () => {
-  const [titleInput, setTitleInput] = useState('제목 없는 설문지')
-  const [descriptionInput, setDescriptionInput] = useState('')
+  const { title: titleInput, description: descriptionInput } = useSelector((state: RootState) => state.title.titleInfo)
+  const dispatch = useDispatch()
 
   const handleTitleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTitleInput(e.currentTarget.value)
+    dispatch(addTitle({ title: e.currentTarget.value }))
   }
 
   const handleDescriptionInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionInput(e.currentTarget.value)
+    dispatch(addDescription({ description: e.currentTarget.value }))
   }
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {

@@ -17,3 +17,10 @@ export interface QuestionState {
     options: QuestionOptionState[]
   }[]
 }
+
+export interface TitleState {
+  titleInfo: {
+    title: string
+    description: string
+  }
+}
