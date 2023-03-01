@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'store'
 import { addTitle } from 'store/questionSlice'
 import FormDropdown from 'components/FormDropdown'
-import FormContainerBox from 'components/FormContainerBox'
 import QuestionWriting from './QuestionWriting'
 import QuestionChoosing from './QuestionChoosing'
 
@@ -25,7 +24,7 @@ const Question = ({ formIndex = 0 }: QuestionProps) => {
   }
 
   return (
-    <FormContainerBox boxType='question'>
+    <form className={styles.questionForm}>
       <div className={styles.questionHeader}>
         <input
           className={styles.question}
@@ -40,7 +39,7 @@ const Question = ({ formIndex = 0 }: QuestionProps) => {
       ) : (
         <QuestionChoosing questionType={questionType} />
       )}
-    </FormContainerBox>
+    </form>
   )
 }
 

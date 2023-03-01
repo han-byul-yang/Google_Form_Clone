@@ -1,4 +1,9 @@
-@use '../.././../styles/constants/colors';
+@use '../../../styles/constants/colors';
+@use '../../../styles/mixins/form';
+
+.questionForm {
+  @include form.containerForm;
+}
 
 .questionHeader {
   display: flex;

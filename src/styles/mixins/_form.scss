@@ -1,0 +1,12 @@
+@use '../constants/colors';
+
+@mixin containerForm {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: colors.$WHITE;
+  border-radius: 8px;
+  transition: 0.2s;
+}

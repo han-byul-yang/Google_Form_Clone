@@ -1,0 +1,62 @@
+@use '../../../../styles/constants/colors';
+
+.formFooter {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 15px 0 0;
+  margin: 5px 0;
+  border-top: 1px solid colors.$GRAY_03;
+}
+
+.footerIcon {
+  width: 25px;
+  height: 25px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.input[type='checkbox'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.label {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 15px;
+  margin-left: 25px;
+  cursor: pointer;
+  background: colors.$BACKGROUND;
+  border-radius: 20px;
+}
+
+.label::after {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  content: '';
+  background: colors.$GRAY_03;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.label::before {
+  position: absolute;
+  top: -4px;
+  left: -25px;
+  width: 0.5px;
+  height: 25px;
+  content: '',;
+  background: colors.$GRAY_02;
+}
+
+.input[type='checkbox']:checked + .label::after {
+  background: colors.$KEY;
+  transform: translateX(25px);
+}
