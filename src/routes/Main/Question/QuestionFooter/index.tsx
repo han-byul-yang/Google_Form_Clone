@@ -13,10 +13,11 @@ interface QuestionFooterProps {
 
 const QuestionFooter = ({ formIndex }: QuestionFooterProps) => {
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+  const newIdQuestionInfos = { ...questionInfos, id: Date.now() }
   const dispatch = useDispatch()
 
   const handleCopyFormClick = () => {
-    dispatch(copyQuestionInfo({ index: formIndex, questionInfos }))
+    dispatch(copyQuestionInfo({ index: formIndex, questionInfos: newIdQuestionInfos }))
   }
 
   const handleDeleteFormClick = () => {

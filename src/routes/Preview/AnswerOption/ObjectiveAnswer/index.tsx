@@ -1,13 +1,16 @@
+import { ChangeEvent } from 'react'
+
 import { QuestionOptionState } from 'types/sliceStateType'
 
 import styles from './objectiveAnswer.module.scss'
 
 interface ObjectiveAnswerProps {
   answerOptions: QuestionOptionState[]
+  handleSetAnswerChange: (e: ChangeEvent<HTMLInputElement>) => void
   index: number
 }
 
-const ObjectiveAnswer = ({ answerOptions, index: optionName }: ObjectiveAnswerProps) => {
+const ObjectiveAnswer = ({ answerOptions, handleSetAnswerChange, index: optionName }: ObjectiveAnswerProps) => {
   return (
     <>
       {answerOptions.map((option, index) => {

@@ -25,7 +25,7 @@ const Preview = () => {
                 <p className={styles.questionTitle}>{questionInfo.title}</p>
                 {questionInfo.essential && <p className={styles.essential}>*</p>}
               </div>
-              <AnswerOption answerType={questionInfo.type.name} answerOptions={questionInfo.options} index={index} />
+              <AnswerOption questionInfo={questionInfo} questionIndex={index} />
             </li>
           )
         })}

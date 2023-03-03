@@ -72,6 +72,10 @@ const questionSlice = createSlice({
       const { index, essential } = action.payload
       state.questionInfos[index].essential = essential
     },
+    setAnswer: (state, action) => {
+      const { index, answer } = action.payload
+      state.questionInfos[index].answer = answer
+    },
   },
 })
 
@@ -87,5 +91,6 @@ export const {
   addEtcOption,
   deleteEtcOption,
   setEssential,
+  setAnswer,
 } = questionSlice.actions
 export default questionSlice
