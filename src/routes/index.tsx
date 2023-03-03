@@ -9,7 +9,7 @@ const App = () => {
     <Routes>
       <Route element={<Layout />}>
         <Route path='/' element={<Main />} />
-        <Route path='/preview' element={<Preview />} />
+        <Route path='preview' element={<Preview />} />
         <Route path='*' element={<div>404</div>} />
       </Route>
     </Routes>

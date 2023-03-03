@@ -1,6 +1,13 @@
 @use '../../styles/mixins/form';
 @use '../../styles/constants/colors';
 
+.previewForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .titlePreview {
   @include form.titleForm;
 }
@@ -19,5 +26,26 @@
 .essentialItem {
   padding: 10px 10px 2px;
   font-size: 13px;
+  color: colors.$NOTICE;
+}
+
+.questionPreviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.questionPreviewItem {
+  @include form.containerForm;
+  width: 100%;
+}
+
+.questionTitleBox {
+  display: flex;
+  align-items: center;
+}
+
+.essential {
   color: colors.$NOTICE;
 }

@@ -1,18 +1,36 @@
 import { useSelector } from 'react-redux'
 
 import { RootState } from 'store'
+import AnswerOption from './AnswerOption'
 
 import styles from './preview.module.scss'
 
 const Preview = () => {
   const { title, description } = useSelector((state: RootState) => state.title.titleInfo)
+  const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
 
   return (
-    <div className={styles.titlePreview}>
-      <p className={styles.title}>{title}</p>
-      <p className={styles.description}>{description}</p>
-      <p className={styles.essentialItem}>* 필수항목</p>
-    </div>
+    <form className={styles.previewForm}>
+      <div className={styles.titlePreview}>
+        <p className={styles.title}>{title}</p>
+        <p className={styles.description}>{description}</p>
+        <p className={styles.essentialItem}>* 필수항목</p>
+      </div>
+      <ul className={styles.questionPreviews}>
+        {questionInfos.map((questionInfo, index) => {
+          const questionInfoKey = `questionInfo-${index}`
+          return (
+            <li key={questionInfoKey} className={styles.questionPreviewItem}>
+              <div className={styles.questionTitleBox}>
+                <p className={styles.questionTitle}>{questionInfo.title}</p>
+                {questionInfo.essential && <p className={styles.essential}>*</p>}
+              </div>
+              <AnswerOption answerType={questionInfo.type.name} answerOptions={questionInfo.options} index={index} />
+            </li>
+          )
+        })}
+      </ul>
+    </form>
   )
 }
 
