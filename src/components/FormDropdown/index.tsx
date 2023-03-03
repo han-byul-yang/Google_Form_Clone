@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import useClickOutside from 'hooks/useClickOutside'
+import useClickTarget from 'hooks/useClickOutside'
 import { RootState } from 'store'
 import { addType } from 'store/questionSlice'
 
@@ -26,12 +26,12 @@ const FormDropdown = ({ formIndex }: FormDropdownProps) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
   const { type: selectedDropdownType } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
-  const containerRef = useRef(null)
+  const targetRef = useRef(null)
 
   const clickOutsideHandle = () => {
     setIsOpenDropdown(false)
   }
-  const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
+  const { clickOutsideEvent } = useClickTarget({ targetRef, clickOutsideHandle })
 
   useEffect(() => {
     clickOutsideEvent()
@@ -63,10 +63,9 @@ const FormDropdown = ({ formIndex }: FormDropdownProps) => {
         </button>
       </p>
       {isOpenDropdown && (
-        <ul className={styles.dropdown} ref={containerRef} style={{ top: -(selectedDropdownType.order * 40) }}>
+        <ul className={styles.dropdown} ref={targetRef} style={{ top: -(selectedDropdownType.order * 40) }}>
           {questionTypes.map((type, index) => {
             const typeKey = `typeKey-${index}`
-
             return (
               <li key={typeKey}>
                 <button type='button' onClick={() => handleTypeDropdownClick(type, index)}>

@@ -20,8 +20,9 @@ const questionSlice = createSlice({
   initialState,
   reducers: {
     addQuestionInfo: (state, action) => {
-      const { index } = action.payload
-      state.questionInfos.splice(index + 1, 0, initialState.questionInfos[0])
+      const { index, id } = action.payload
+      const newQuestionInfo = { ...initialState.questionInfos[0], id }
+      state.questionInfos.splice(index + 1, 0, newQuestionInfo)
     },
     copyQuestionInfo: (state, action) => {
       const { index, questionInfos } = action.payload
