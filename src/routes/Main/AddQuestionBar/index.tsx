@@ -9,10 +9,10 @@ import styles from './addQuestionBar.module.scss'
 
 interface AddQuestionBarProps {
   targetedItemPlace: { x: number; y: number }
-  questionInfoIndex: number
+  formIndex: number
 }
 
-const AddQuestionBar = ({ targetedItemPlace, questionInfoIndex }: AddQuestionBarProps) => {
+const AddQuestionBar = ({ targetedItemPlace, formIndex }: AddQuestionBarProps) => {
   const [barHeight, setBarHeight] = useState(0)
   const barRef = useRef<HTMLDivElement>(null)
   const { x, y } = targetedItemPlace
@@ -27,7 +27,7 @@ const AddQuestionBar = ({ targetedItemPlace, questionInfoIndex }: AddQuestionBar
   }, [])
 
   const handleAddQuestionClick = () => {
-    dispatch(addQuestionInfo({ index: questionInfoIndex, id: date }))
+    dispatch(addQuestionInfo({ index: formIndex, id: date }))
   }
 
   return (

@@ -13,7 +13,7 @@ import styles from './main.module.scss'
 
 const Main = () => {
   const [targetedItemPlace, setTargetedItemPlace] = useState({ x: 0, y: 0 })
-  const [questionInfoIndex, setQuestionInfoIndex] = useState(0)
+  const [formIndex, setFormIndex] = useState(0)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
   const navigate = useNavigate()
   const targetRef = useRef<HTMLLIElement>(null)
@@ -23,7 +23,7 @@ const Main = () => {
       const { width, height } = targetRef.current.getBoundingClientRect()
       setTargetedItemPlace({ x: width, y: height })
     } */ // 로직 분리
-    setQuestionInfoIndex(index)
+    setFormIndex(index)
   }
 
   const handleMovePreviewClick = () => {
@@ -48,13 +48,13 @@ const Main = () => {
                   ref={targetRef}
                   onClick={() => clickInsideHandle(index)}
                 >
-                  <Question questionInfoIndex={index} />
+                  <Question formIndex={index} />
                 </li>
               )
             })}
           </ul>
         </div>
-        <AddQuestionBar targetedItemPlace={targetedItemPlace} questionInfoIndex={questionInfoIndex} />
+        <AddQuestionBar targetedItemPlace={targetedItemPlace} formIndex={formIndex} />
       </div>
     </>
   )

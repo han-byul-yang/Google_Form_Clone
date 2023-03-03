@@ -10,6 +10,7 @@ const initialState = {
       type: { name: '객관식 질문', order: 2 },
       essential: false,
       options: [{ name: '옵션1', value: '옵션1' }],
+      etcOption: { name: '기타', value: false },
       answer: '',
     },
   ],
@@ -41,10 +42,9 @@ const questionSlice = createSlice({
       state.questionInfos[index].type = type
     },
     addOption: (state, action) => {
-      const { index, option, etcOption } = action.payload
+      const { index, option } = action.payload
       const optionLength = state.questionInfos[index].options.length
-      if (etcOption) state.questionInfos[index].options.splice(optionLength - 1, 0, option)
-      else state.questionInfos[index].options.splice(optionLength, 0, option)
+      state.questionInfos[index].options.splice(optionLength, 0, option)
     },
     editOption: (state, action) => {
       const { index, option } = action.payload
@@ -59,14 +59,13 @@ const questionSlice = createSlice({
     },
     addEtcOption: (state, action) => {
       const { index } = action.payload
-      const optionLength = state.questionInfos[index].options.length
-      const etcOption = { name: '기타', value: '기타' }
-      state.questionInfos[index].options.splice(optionLength, 0, etcOption)
+      const etcOption = { name: '기타', value: true }
+      state.questionInfos[index].etcOption = etcOption
     },
     deleteEtcOption: (state, action) => {
       const { index } = action.payload
-      const optionLength = state.questionInfos[index].options.length
-      state.questionInfos[index].options.splice(optionLength, 1)
+      const etcOption = { name: '기타', value: false }
+      state.questionInfos[index].etcOption = etcOption
     },
     setEssential: (state, action) => {
       const { index, essential } = action.payload

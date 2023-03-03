@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
 import { RootState } from 'store'
-import AnswerOption from './AnswerOption'
+import PreviewOption from './PreviewOption'
 
 import styles from './preview.module.scss'
 
@@ -25,7 +25,7 @@ const Preview = () => {
                 <p className={styles.questionTitle}>{questionInfo.title}</p>
                 {questionInfo.essential && <p className={styles.essential}>*</p>}
               </div>
-              <AnswerOption questionInfo={questionInfo} questionIndex={index} />
+              <PreviewOption questionInfo={questionInfo} formIndex={index} />
             </li>
           )
         })}

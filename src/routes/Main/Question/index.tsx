@@ -6,15 +6,16 @@ import { addTitle } from 'store/questionSlice'
 import FormDropdown from 'components/FormDropdown'
 import QuestionWriting from './QuestionWriting'
 import QuestionChoosing from './QuestionChoosing'
+import QuestionOption from './QuestionOption'
 import QuestionFooter from './QuestionFooter'
 
 import styles from './question.module.scss'
 
 interface QuestionProps {
-  questionInfoIndex: number
+  formIndex: number
 }
 
-const Question = ({ questionInfoIndex: formIndex }: QuestionProps) => {
+const Question = ({ formIndex }: QuestionProps) => {
   const { type: questionType, title: questionTitle } = useSelector(
     (state: RootState) => state.question.questionInfos[formIndex]
   )
@@ -35,11 +36,12 @@ const Question = ({ questionInfoIndex: formIndex }: QuestionProps) => {
         />
         <FormDropdown formIndex={formIndex} />
       </div>
-      {questionType.name === '단답형' || questionType.name === '장문형' ? (
+      {/* questionType.name === '단답형' || questionType.name === '장문형' ? (
         <QuestionWriting formIndex={formIndex} />
       ) : (
         <QuestionChoosing formIndex={formIndex} />
-      )}
+      ) */}
+      <QuestionOption questionType={questionType.name} formIndex={formIndex} />
       <QuestionFooter formIndex={formIndex} />
     </form>
   )

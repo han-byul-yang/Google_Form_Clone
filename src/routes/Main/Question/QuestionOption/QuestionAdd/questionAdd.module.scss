@@ -1,0 +1,28 @@
+@use '../../../../../styles/constants/colors';
+
+.addOptions {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: colors.$GRAY_03;
+}
+
+.addOption {
+  padding: 5px;
+  margin: 0 3px 0 5px;
+  cursor: text;
+
+  &:hover {
+    border-bottom: 1px solid colors.$GRAY_02;
+  }
+}
+
+.addEtc {
+  padding: 5px;
+  color: colors.$KEY;
+
+  &:hover {
+    padding: 5px;
+    background: colors.$BACKGROUND;
+  }
+}

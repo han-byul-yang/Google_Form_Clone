@@ -8,12 +8,18 @@ export interface QuestionOptionState {
   value: string
 }
 
+interface QuestionEtcOptionState {
+  name: string
+  value: boolean
+}
+
 export interface QuestionInfo {
   id: number
   title: string
   type: QuestionTypeState
   essential: boolean
   options: QuestionOptionState[]
+  etcOption: QuestionEtcOptionState
   answer: string
 }
 

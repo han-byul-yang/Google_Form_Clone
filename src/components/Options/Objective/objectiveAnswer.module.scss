@@ -1,4 +1,4 @@
-@use '../../../../styles/mixins/option';
+@use '../../../styles/mixins/option';
 
 .radio {
   @include option.choosingOption;

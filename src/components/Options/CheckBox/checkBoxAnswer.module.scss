@@ -1,5 +1,5 @@
-@use '../../../../styles/constants/colors';
-@use '../../../../styles/mixins/option';
+@use '../../../styles/constants/colors';
+@use '../../../styles/mixins/option';
 
 .checkBox {
   @include option.choosingOption;
