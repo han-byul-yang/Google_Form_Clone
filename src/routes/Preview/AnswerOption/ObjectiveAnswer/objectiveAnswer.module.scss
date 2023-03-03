@@ -1,0 +1,9 @@
+@use '../../../../styles/mixins/option';
+
+.radio {
+  @include option.choosingOption;
+
+  input {
+    margin-right: 5px;
+  }
+}

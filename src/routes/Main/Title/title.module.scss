@@ -3,18 +3,7 @@
 @use '../../../styles/mixins/form';
 
 .titleForm {
-  @include form.containerForm;
-  border-top: 10px solid colors.$KEY;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    content: '';
-    background: colors.$WHITE;
-  }
+  @include form.titleForm;
 }
 
 .title {

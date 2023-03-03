@@ -10,3 +10,18 @@
   border-radius: 8px;
   transition: 0.2s;
 }
+
+@mixin titleForm {
+  @include containerForm;
+  border-top: 10px solid colors.$KEY;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    content: '';
+    background: colors.$WHITE;
+  }
+}

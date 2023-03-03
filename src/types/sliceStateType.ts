@@ -1,4 +1,4 @@
-export interface QuestionTypeState {
+interface QuestionTypeState {
   name: string
   order: number
 }
@@ -8,14 +8,17 @@ export interface QuestionOptionState {
   value: string
 }
 
+export interface QuestionInfo {
+  id: number
+  title: string
+  type: QuestionTypeState
+  essential: boolean
+  options: QuestionOptionState[]
+  answer: string
+}
+
 export interface QuestionState {
-  questionInfos: {
-    id: number
-    title: string
-    type: QuestionTypeState
-    essential: boolean
-    options: QuestionOptionState[]
-  }[]
+  questionInfos: QuestionInfo[]
 }
 
 export interface TitleState {

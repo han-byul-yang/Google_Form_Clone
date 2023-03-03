@@ -1,0 +1,10 @@
+@use '../../../../styles/constants/colors';
+@use '../../../../styles/mixins/option';
+
+.checkBox {
+  @include option.choosingOption;
+
+  input {
+    margin-right: 5px;
+  }
+}

@@ -10,6 +10,7 @@ const initialState = {
       type: { name: '객관식 질문', order: 2 },
       essential: false,
       options: [{ name: '옵션1', value: '옵션1' }],
+      answer: '',
     },
   ],
 } as QuestionState
