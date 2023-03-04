@@ -1,3 +1,15 @@
-.longText {
+@use '../../../styles/constants/colors';
 
+.longText {
+  width: 100%;
+  max-width: 500px;
+  height: 30px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 30px;
+  color: colors.$FONT;
+  resize: none;
+  background: none;
+  border: none;
+  border-bottom: 1px dotted colors.$GRAY_03;
 }

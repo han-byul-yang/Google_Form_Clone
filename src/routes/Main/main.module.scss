@@ -1,4 +1,5 @@
 @use '../../styles/constants/colors';
+@use '../../styles/mixins/form';
 
 .navigation {
   position: fixed;
@@ -51,5 +52,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+.questionAnsweritem {
+  @include form.containerForm;
   width: 100%;
 }

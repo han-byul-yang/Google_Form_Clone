@@ -14,6 +14,7 @@ const LongText = ({ type, handlePreviewOptionChange, answer }: ShortTextProps) =
       className={styles.longText}
       value={answer}
       onChange={handlePreviewOptionChange}
+      placeholder={type === 'question' ? '장문형 텍스트' : '내 답변'}
       disabled={type === 'question' || type === 'answer'}
     />
   )

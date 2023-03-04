@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'store'
 import { addOption, addEtcOption } from 'store/questionSlice'
 
-import styles from 'styles'
+import styles from './questionAdd.module.scss'
 
 interface QuestionAddProps {
   formIndex: number
@@ -27,7 +27,6 @@ const QuestionAdd = ({ formIndex }: QuestionAddProps) => {
 
   return (
     <p className={styles.addOptions}>
-      {/* optionTypeIcons(questionType.name) */}
       <button type='button' className={styles.addOption} onClick={handleAddOptionClick}>
         옵션 추가
       </button>

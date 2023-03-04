@@ -1,0 +1,10 @@
+@use '../../../styles/constants/colors';
+
+.shortText {
+  max-width: 300px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 30px;
+  color: colors.$FONT;
+  border-bottom: 1px dotted colors.$GRAY_03;
+}

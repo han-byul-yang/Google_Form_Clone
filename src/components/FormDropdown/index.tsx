@@ -23,7 +23,7 @@ interface FormDropdownProps {
 
 const FormDropdown = ({ formIndex, items, icons, selectedState, action }: FormDropdownProps) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(2)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const dispatch = useDispatch()
   const targetRef = useRef(null)
 

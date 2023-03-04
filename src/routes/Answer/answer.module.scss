@@ -1,0 +1,44 @@
+@use '../../styles/mixins/form';
+@use '../../styles/constants/colors';
+
+.answerForm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.titleAnswer {
+  @include form.titleForm;
+}
+
+.questionAnswers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.questionAnswerItem {
+  @include form.containerForm;
+  width: 100%;
+}
+
+.questionTitleBox {
+  display: flex;
+  align-items: center;
+}
+
+.essential {
+  color: colors.$NOTICE;
+}
+
+.submitButton {
+  position: absolute;
+  bottom: 0;
+  padding: 10px 25px;
+  color: colors.$WHITE;
+  background: colors.$KEY;
+  border-radius: 8px;
+}
