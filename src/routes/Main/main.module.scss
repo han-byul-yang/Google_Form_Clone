@@ -32,6 +32,7 @@
 .mainContainer {
   position: relative;
   display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
   margin: 50px 0 0;
@@ -42,6 +43,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 700px;
 
   ul {
     width: 100%;
@@ -58,4 +60,10 @@
 .questionAnsweritem {
   @include form.containerForm;
   width: 100%;
+}
+
+.barContainer {
+  position: relative;
+  height: 100%;
+  margin-left: 10px;
 }

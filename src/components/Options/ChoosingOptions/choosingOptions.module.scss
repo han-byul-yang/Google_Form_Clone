@@ -29,11 +29,14 @@
 }
 
 .etcOption {
-  input {
+  display: flex;
+  align-items: center;
+
+  input[type='text'] {
     width: 100%;
     padding: 10px 5px;
     margin-left: 5px;
-    font-size: 13px;
+    font-size: 14px;
     color: colors.$GRAY_03;
 
     &:hover {

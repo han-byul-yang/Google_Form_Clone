@@ -14,19 +14,19 @@ import styles from './main.module.scss'
 
 const Main = () => {
   const [targetedItemPlace, setTargetedItemPlace] = useState({ x: 0, y: 0 })
-  const [targeted, setTargeted] = useState(0)
+  const [targetedForm, setTargetedForm] = useState(0)
   const [formIndex, setFormIndex] = useState(0)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
   const navigate = useNavigate()
   const targetRef = useRef<HTMLLIElement>(null)
 
-  const clickInsideHandle = (index: number, id: number) => {
+  const handleInsideClick = (index: number, id: number) => {
     /* if (targetRef && targetRef.current) {
       const { width, height } = targetRef.current.getBoundingClientRect()
       setTargetedItemPlace({ x: width, y: height })
     } */ // 로직 분리
     setFormIndex(index)
-    setTargeted(id)
+    setTargetedForm(id)
   }
 
   const handleMovePreviewClick = () => {
@@ -49,9 +49,9 @@ const Main = () => {
                   key={questionInfo.id}
                   className={styles.questionItem}
                   ref={targetRef}
-                  onClick={() => clickInsideHandle(index, questionInfo.id)}
+                  onClick={() => handleInsideClick(index, questionInfo.id)}
                 >
-                  {targeted === questionInfo.id ? (
+                  {targetedForm === questionInfo.id ? (
                     <Question formIndex={index} />
                   ) : (
                     <div className={styles.questionAnsweritem}>
@@ -64,7 +64,9 @@ const Main = () => {
             })}
           </ul>
         </div>
-        <AddQuestionBar targetedItemPlace={targetedItemPlace} formIndex={formIndex} />
+        <div className={styles.barContainer}>
+          <AddQuestionBar targetedItemPlace={targetedItemPlace} formIndex={formIndex} />
+        </div>
       </div>
     </>
   )

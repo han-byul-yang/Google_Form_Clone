@@ -60,7 +60,8 @@ const ChoosingOptions = ({
         )
       })}
       {etcOption.value && (
-        <li className='etcOption'>
+        <li className={styles.etcOption}>
+          {cloneElement(children)}
           <input type='text' placeholder='기타...' disabled={type === 'question' || type === 'answer'} />
           {type === 'question' && <XIcon className={styles.xIcon} onClick={handleDeleteEtcClick} />}
         </li>

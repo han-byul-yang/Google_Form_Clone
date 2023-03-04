@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import useClickTarget from 'hooks/useClickOutside'
+import useClickOutside from 'hooks/useClickOutside'
 import { RootState } from 'store'
 import { addType } from 'store/questionSlice'
 
@@ -30,7 +30,7 @@ const FormDropdown = ({ formIndex, items, icons, selectedState, action }: FormDr
   const clickOutsideHandle = () => {
     setIsOpenDropdown(false)
   }
-  const { clickOutsideEvent } = useClickTarget({ targetRef, clickOutsideHandle })
+  const { clickOutsideEvent } = useClickOutside({ targetRef, clickOutsideHandle })
 
   useEffect(() => {
     clickOutsideEvent()
