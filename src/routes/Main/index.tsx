@@ -7,7 +7,7 @@ import { RootState } from 'store'
 import Title from './Title'
 import Question from './Question'
 import AddQuestionBar from './AddQuestionBar'
-import QuestionOption from './Question/QuestionOption'
+import AnswerOption from 'routes/Answer/AnswerOption'
 
 import { EyeIcon } from 'assets/svgs'
 import styles from './main.module.scss'
@@ -51,12 +51,14 @@ const Main = () => {
                   ref={targetRef}
                   onClick={() => clickInsideHandle(index, questionInfo.id)}
                 >
-                  <Question formIndex={index} />
-                  {/* targeted === questionInfo.id ? (
+                  {targeted === questionInfo.id ? (
                     <Question formIndex={index} />
                   ) : (
-                    <QuestionOption questionType={questionInfo.type} formIndex={formIndex} />
-                  ) */}
+                    <div className={styles.questionAnsweritem}>
+                      <p className={styles.questionTitle}>{questionInfo.title}</p>
+                      <AnswerOption questionInfo={questionInfo} formIndex={formIndex} />
+                    </div>
+                  )}
                 </li>
               )
             })}
