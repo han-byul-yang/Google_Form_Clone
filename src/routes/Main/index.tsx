@@ -7,23 +7,26 @@ import { RootState } from 'store'
 import Title from './Title'
 import Question from './Question'
 import AddQuestionBar from './AddQuestionBar'
+import QuestionOption from './Question/QuestionOption'
 
 import { EyeIcon } from 'assets/svgs'
 import styles from './main.module.scss'
 
 const Main = () => {
   const [targetedItemPlace, setTargetedItemPlace] = useState({ x: 0, y: 0 })
+  const [targeted, setTargeted] = useState(0)
   const [formIndex, setFormIndex] = useState(0)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
   const navigate = useNavigate()
   const targetRef = useRef<HTMLLIElement>(null)
 
-  const clickInsideHandle = (index: number) => {
+  const clickInsideHandle = (index: number, id: number) => {
     /* if (targetRef && targetRef.current) {
       const { width, height } = targetRef.current.getBoundingClientRect()
       setTargetedItemPlace({ x: width, y: height })
     } */ // 로직 분리
     setFormIndex(index)
+    setTargeted(id)
   }
 
   const handleMovePreviewClick = () => {
@@ -46,9 +49,14 @@ const Main = () => {
                   key={questionInfo.id}
                   className={styles.questionItem}
                   ref={targetRef}
-                  onClick={() => clickInsideHandle(index)}
+                  onClick={() => clickInsideHandle(index, questionInfo.id)}
                 >
                   <Question formIndex={index} />
+                  {/* targeted === questionInfo.id ? (
+                    <Question formIndex={index} />
+                  ) : (
+                    <QuestionOption questionType={questionInfo.type} formIndex={formIndex} />
+                  ) */}
                 </li>
               )
             })}

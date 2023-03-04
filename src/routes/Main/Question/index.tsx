@@ -1,8 +1,9 @@
 import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { questionTypes, questionTypeIcons } from 'utils/questionTypes'
 import { RootState } from 'store'
-import { addTitle } from 'store/questionSlice'
+import { addTitle, addType } from 'store/questionSlice'
 import FormDropdown from 'components/FormDropdown'
 import QuestionWriting from './QuestionWriting'
 import QuestionChoosing from './QuestionChoosing'
@@ -20,6 +21,7 @@ const Question = ({ formIndex }: QuestionProps) => {
     (state: RootState) => state.question.questionInfos[formIndex]
   )
   const dispatch = useDispatch()
+  const dropdownAction = (type: string) => addType({ index: formIndex, type })
 
   const handleQuestionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(addTitle({ index: formIndex, title: e.currentTarget.value }))
@@ -34,14 +36,20 @@ const Question = ({ formIndex }: QuestionProps) => {
           value={questionTitle}
           onChange={handleQuestionInputChange}
         />
-        <FormDropdown formIndex={formIndex} />
+        <FormDropdown
+          formIndex={formIndex}
+          items={questionTypes}
+          icons={questionTypeIcons}
+          selectedState={questionType}
+          action={dropdownAction}
+        />
       </div>
       {/* questionType.name === '단답형' || questionType.name === '장문형' ? (
         <QuestionWriting formIndex={formIndex} />
       ) : (
         <QuestionChoosing formIndex={formIndex} />
       ) */}
-      <QuestionOption questionType={questionType.name} formIndex={formIndex} />
+      <QuestionOption questionType={questionType} formIndex={formIndex} />
       <QuestionFooter formIndex={formIndex} />
     </form>
   )

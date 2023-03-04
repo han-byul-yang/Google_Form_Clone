@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { RootState } from 'store'
 import PreviewOption from './PreviewOption'
@@ -8,6 +9,11 @@ import styles from './preview.module.scss'
 const Preview = () => {
   const { title, description } = useSelector((state: RootState) => state.title.titleInfo)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
+  const navigate = useNavigate()
+
+  const handleSubmitClick = () => {
+    navigate('/answer')
+  }
 
   return (
     <form className={styles.previewForm}>
@@ -30,6 +36,9 @@ const Preview = () => {
           )
         })}
       </ul>
+      <button type='button' className={styles.submitButton} onClick={handleSubmitClick}>
+        제출
+      </button>
     </form>
   )
 }

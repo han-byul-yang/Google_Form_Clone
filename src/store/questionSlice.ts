@@ -7,7 +7,7 @@ const initialState = {
     {
       id: Date.now(),
       title: '제목 없는 질문',
-      type: { name: '객관식 질문', order: 2 },
+      type: '객관식 질문',
       essential: false,
       options: [{ name: '옵션1', value: '옵션1' }],
       etcOption: { name: '기타', value: false },

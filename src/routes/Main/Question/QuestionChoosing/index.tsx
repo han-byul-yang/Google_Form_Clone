@@ -59,7 +59,7 @@ const QuestionChoosing = ({ formIndex }: QuestionChoosingProps) => {
           return (
             <li key={optionKey}>
               <div className={styles.optionInput}>
-                {optionTypeIcons(questionType.name)}
+                {optionTypeIcons(questionType)}
                 <input type='text' name={option.name} value={option.value} onChange={handleOptionInputChange} />
               </div>
               {(optionsInput.length !== 1 || index !== 0) && (
@@ -70,14 +70,14 @@ const QuestionChoosing = ({ formIndex }: QuestionChoosingProps) => {
         })}
         {isAddEtcOption && (
           <li className={styles.etcOption}>
-            {optionTypeIcons(questionType.name)}
+            {optionTypeIcons(questionType)}
             <p>기타...</p>
             <XIcon className={styles.xIcon} onClick={handleDeleteEtcClick} />
           </li>
         )}
       </ul>
       <p className={styles.addOptions}>
-        {optionTypeIcons(questionType.name)}
+        {optionTypeIcons(questionType)}
         <button type='button' className={styles.addOption} onClick={handleAddOptionClick}>
           옵션 추가
         </button>

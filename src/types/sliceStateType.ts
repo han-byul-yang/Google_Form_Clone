@@ -1,8 +1,3 @@
-interface QuestionTypeState {
-  name: string
-  order: number
-}
-
 export interface QuestionOptionState {
   name: string
   value: string
@@ -16,7 +11,7 @@ interface QuestionEtcOptionState {
 export interface QuestionInfo {
   id: number
   title: string
-  type: QuestionTypeState
+  type: string
   essential: boolean
   options: QuestionOptionState[]
   etcOption: QuestionEtcOptionState
