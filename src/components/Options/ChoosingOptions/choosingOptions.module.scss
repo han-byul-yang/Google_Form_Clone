@@ -53,10 +53,17 @@
   background: colors.$KEY;
 }
 
+.warningIcon {
+  width: 20px;
+  height: 20px;
+  fill: colors.$NOTICE;
+}
+
 .xIcon {
   width: 20px;
   height: 20px;
   padding: 2px;
+  margin-left: 5px;
   cursor: pointer;
 
   &:hover {

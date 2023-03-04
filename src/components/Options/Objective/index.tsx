@@ -12,6 +12,7 @@ interface CheckBoxProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
+  sameOptionError?: { place: string; error: boolean }
   handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleDeleteQuestionOptionClick?: (name: string) => void

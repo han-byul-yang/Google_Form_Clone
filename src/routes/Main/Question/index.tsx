@@ -5,8 +5,6 @@ import { questionTypes, questionTypeIcons } from 'utils/questionTypes'
 import { RootState } from 'store'
 import { addTitle, addType } from 'store/questionSlice'
 import FormDropdown from 'components/FormDropdown'
-import QuestionWriting from './QuestionWriting'
-import QuestionChoosing from './QuestionChoosing'
 import QuestionOption from './QuestionOption'
 import QuestionFooter from './QuestionFooter'
 
@@ -44,11 +42,6 @@ const Question = ({ formIndex }: QuestionProps) => {
           action={dropdownAction}
         />
       </div>
-      {/* questionType.name === '단답형' || questionType.name === '장문형' ? (
-        <QuestionWriting formIndex={formIndex} />
-      ) : (
-        <QuestionChoosing formIndex={formIndex} />
-      ) */}
       <QuestionOption questionType={questionType} formIndex={formIndex} />
       <QuestionFooter formIndex={formIndex} />
     </form>

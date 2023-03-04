@@ -5,7 +5,7 @@ import cx from 'classnames'
 import { QuestionOptionState } from 'types/sliceStateType'
 import { RootState } from 'store'
 
-import { XIcon } from 'assets/svgs'
+import { WarningIcon, XIcon } from 'assets/svgs'
 import styles from './choosingOptions.module.scss'
 
 interface ChoosingOptionsProps {
@@ -13,6 +13,7 @@ interface ChoosingOptionsProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
+  sameOptionError?: { place: string; error: boolean }
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleDeleteQuestionOptionClick?: (name: string) => void
   handleDeleteEtcClick?: () => void
@@ -23,6 +24,7 @@ const ChoosingOptions = ({
   type,
   formIndex,
   options,
+  sameOptionError,
   handleQuestionOptionChange,
   handleDeleteQuestionOptionClick,
   handleDeleteEtcClick,
@@ -47,7 +49,12 @@ const ChoosingOptions = ({
               )}
             </div>
             {type === 'question' && handleDeleteQuestionOptionClick && (options.length !== 1 || index !== 0) && (
-              <XIcon className={styles.xIcon} onClick={() => handleDeleteQuestionOptionClick(option.name)} />
+              <>
+                {sameOptionError?.error && sameOptionError.place === option.name && (
+                  <WarningIcon className={styles.warningIcon} />
+                )}
+                <XIcon className={styles.xIcon} onClick={() => handleDeleteQuestionOptionClick(option.name)} />
+              </>
             )}
           </li>
         )

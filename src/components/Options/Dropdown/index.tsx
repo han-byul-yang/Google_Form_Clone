@@ -7,6 +7,7 @@ interface DropdownProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
+  sameOptionError?: { place: string; error: boolean }
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleDeleteQuestionOptionClick?: (name: string) => void
   handleDeleteEtcClick?: () => void

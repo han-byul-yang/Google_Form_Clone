@@ -51,7 +51,7 @@ const FormDropdown = ({ formIndex, items, icons, selectedState, action }: FormDr
       <p className={styles.selectedType}>
         <button type='button' onClick={handleOpenDropdownClick}>
           {icons && icons(selectedState, styles)}
-          <p>{selectedState}</p>
+          <p>{selectedState || '선택하기'}</p>
         </button>
       </p>
       {isOpenDropdown && (

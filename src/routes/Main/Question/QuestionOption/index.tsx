@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from 'store'
@@ -18,11 +18,18 @@ interface QuestionOptionProps {
 }
 
 const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
+  const [sameOptionError, setSameOptionError] = useState({ place: '', error: false })
   const { options: optionsInput } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
+  const optionsInputValues = optionsInput.map((option) => option.value)
 
   const handleQuestionOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget
+    if (optionsInputValues.includes(value)) {
+      setSameOptionError({ place: name, error: true })
+    } else {
+      setSameOptionError((prevState) => ({ ...prevState, error: false }))
+    }
     dispatch(editOption({ index: formIndex, option: { name, value } }))
   }
 
@@ -42,6 +49,7 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
         type='question'
         formIndex={formIndex}
         options={optionsInput}
+        sameOptionError={sameOptionError}
         handleQuestionOptionChange={handleQuestionOptionChange}
         handleDeleteEtcClick={handleDeleteEtcClick}
         handleDeleteQuestionOptionClick={handleDeleteQuestionOptionClick}
@@ -52,6 +60,7 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
         type='question'
         formIndex={formIndex}
         options={optionsInput}
+        sameOptionError={sameOptionError}
         handleQuestionOptionChange={handleQuestionOptionChange}
         handleDeleteQuestionOptionClick={handleDeleteQuestionOptionClick}
         handleDeleteEtcClick={handleDeleteEtcClick}
@@ -62,6 +71,7 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
         type='question'
         formIndex={formIndex}
         options={optionsInput}
+        sameOptionError={sameOptionError}
         handleQuestionOptionChange={handleQuestionOptionChange}
         handleDeleteEtcClick={handleDeleteEtcClick}
         handleDeleteQuestionOptionClick={handleDeleteQuestionOptionClick}

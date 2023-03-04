@@ -49,7 +49,9 @@ const questionSlice = createSlice({
     editOption: (state, action) => {
       const { index, option } = action.payload
       const optionIndex = state.questionInfos[index].options.findIndex((item) => item.name === option.name)
+      const optionsValues = state.questionInfos[index].options.map((infoOption) => infoOption.value)
       if (optionIndex === -1) return
+      if (optionsValues.includes(option.value)) return
       state.questionInfos[index].options[optionIndex] = option
     },
     deleteOption: (state, action) => {
