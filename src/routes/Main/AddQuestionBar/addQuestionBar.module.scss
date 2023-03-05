@@ -6,11 +6,15 @@
 }
 
 .addQuestionBar {
-  top: 0;
   padding: 15px;
   background: colors.$WHITE;
   border-radius: 8px;
   transition: 0.2s;
+
+  button {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .addIcon {

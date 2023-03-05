@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react'
 import { QuestionOptionState } from 'types/sliceStateType'
 import ChoosingOptions from '../ChoosingOptions'
 
-interface DropdownProps {
+interface ChoosingDropdownProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
@@ -17,12 +17,20 @@ interface ChoosingOptionsChildrenProps {
   option: QuestionOptionState
 }
 
-const Dropdown = (props: DropdownProps, { option }: ChoosingOptionsChildrenProps) => {
+interface DropdownProps {
+  option: QuestionOptionState
+}
+
+const Dropdown = ({ option }: DropdownProps) => {
+  return <p>{option?.name}</p>
+}
+
+const ChoosingDropdown = (props: ChoosingDropdownProps, { option }: ChoosingOptionsChildrenProps) => {
   return (
     <ChoosingOptions {...props}>
-      <p>{option?.name}</p>
+      <Dropdown option={option} />
     </ChoosingOptions>
   )
 }
 
-export default Dropdown
+export default ChoosingDropdown

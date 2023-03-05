@@ -8,7 +8,7 @@ import ChoosingOptions from '../ChoosingOptions'
 import { XIcon } from 'assets/svgs'
 import styles from './checkBoxAnswer.module.scss'
 
-interface CheckBoxProps {
+interface ChoosingCheckBoxProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
@@ -23,21 +23,33 @@ interface ChoosingOptionsChildrenProps {
   option: QuestionOptionState
 }
 
-const CheckBox = (props: CheckBoxProps, { option }: ChoosingOptionsChildrenProps) => {
+interface CheckBoxProps {
+  option: QuestionOptionState
+  type: string
+  handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+const CheckBox = ({ option, type, handlePreviewOptionChange }: CheckBoxProps) => {
+  return (
+    <input
+      type='checkbox'
+      id={`${option?.name}`}
+      name={`${option?.name}`}
+      value={`${option?.value}`}
+      onChange={handlePreviewOptionChange}
+      disabled={type === 'question' || type === 'answer'}
+    />
+  )
+}
+
+const ChoosingCheckBox = (props: ChoosingCheckBoxProps, { option }: ChoosingOptionsChildrenProps) => {
   const { type, handlePreviewOptionChange } = props
 
   return (
     <ChoosingOptions {...props}>
-      <input
-        type='checkbox'
-        id={`${option?.name}`}
-        name={`${option?.name}`}
-        value={`${option?.value}`}
-        onChange={handlePreviewOptionChange}
-        disabled={type === 'question' || type === 'answer'}
-      />
+      <CheckBox option={option} type={type} handlePreviewOptionChange={handlePreviewOptionChange} />
     </ChoosingOptions>
   )
 }
 
-export default CheckBox
+export default ChoosingCheckBox

@@ -8,7 +8,7 @@ import ChoosingOptions from '../ChoosingOptions'
 import { XIcon } from 'assets/svgs'
 import styles from './checkBoxAnswer.module.scss'
 
-interface CheckBoxProps {
+interface ChoosingObjectiveProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
@@ -23,21 +23,39 @@ interface ChoosingOptionsChildrenProps {
   option: QuestionOptionState
 }
 
-const Objective = (props: CheckBoxProps, { option }: ChoosingOptionsChildrenProps) => {
+interface ObjectiveProps {
+  option: QuestionOptionState
+  formIndex: number
+  type: string
+  handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+const Objective = ({ option, formIndex, type, handlePreviewOptionChange }: ObjectiveProps) => {
+  return (
+    <input
+      type='radio'
+      id={`${option?.name}`}
+      name={`${formIndex}`}
+      value={`${option?.value}`}
+      onChange={handlePreviewOptionChange}
+      disabled={type === 'question' || type === 'answer'}
+    />
+  )
+}
+
+const ChoosingObjective = (props: ChoosingObjectiveProps, { option }: ChoosingOptionsChildrenProps) => {
   const { type, formIndex, handlePreviewOptionChange } = props
 
   return (
     <ChoosingOptions {...props}>
-      <input
-        type='radio'
-        id={`${option?.name}`}
-        name={`${formIndex}`}
-        value={`${option?.value}`}
-        onChange={handlePreviewOptionChange}
-        disabled={type === 'question' || type === 'answer'}
+      <Objective
+        option={option}
+        formIndex={formIndex}
+        type={type}
+        handlePreviewOptionChange={handlePreviewOptionChange}
       />
     </ChoosingOptions>
   )
 }
 
-export default Objective
+export default ChoosingObjective
