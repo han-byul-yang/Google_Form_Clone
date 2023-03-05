@@ -40,9 +40,26 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
     setPreviewChange(e)
   }
 
+  const handleCheckBoxPreviewChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { checked, value } = e.currentTarget
+    let answers: string[]
+    if (checked) {
+      answers = [...(answer as string[]), e.currentTarget.value]
+    } else {
+      const valueIndex = answer.indexOf(value)
+      answers = [...(answer as string[])]
+      answers.splice(valueIndex, 1)
+    }
+    dispatch(setAnswer({ index: formIndex, answer: answers }))
+  }
+
   const previewOptionComponents = {
-    단답형: <ShortText type='preview' handlePreviewOptionChange={handleShortTextPreviewChange} answer={answer} />,
-    장문형: <LongText type='preview' handlePreviewOptionChange={handleLongTextPreviewChange} answer={answer} />,
+    단답형: (
+      <ShortText type='preview' handlePreviewOptionChange={handleShortTextPreviewChange} answer={answer as string} />
+    ),
+    장문형: (
+      <LongText type='preview' handlePreviewOptionChange={handleLongTextPreviewChange} answer={answer as string} />
+    ),
     '객관식 질문': (
       <Objective
         type='preview'
@@ -56,11 +73,16 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
         type='preview'
         formIndex={formIndex}
         options={previewOptions}
-        handlePreviewOptionChange={handleChoosePreviewChange}
+        handlePreviewOptionChange={handleCheckBoxPreviewChange}
       />
     ),
     드롭다운: (
-      <FormDropdown formIndex={formIndex} items={optionValues} selectedState={answer} action={dropdownAction} />
+      <FormDropdown
+        formIndex={formIndex}
+        items={optionValues}
+        selectedState={answer as string}
+        action={dropdownAction}
+      />
     ),
   }[previewType]
 

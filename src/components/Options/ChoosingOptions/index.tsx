@@ -38,9 +38,15 @@ const ChoosingOptions = ({
           <li key={option.name} className={styles.checkBoxItem}>
             <div className={styles.valueInput}>
               {cloneElement(children, { option })}
-              {type === 'preview' && <label htmlFor={`${option.name}`}>{option.value}</label>}
+              {type === 'preview' && <label htmlFor={`${formIndex}-${option.name}`}>{option.value}</label>}
               {type === 'answer' && (
-                <label className={cx({ selectedAnswer: option.name === answer })} htmlFor={`${option.name}`}>
+                <label
+                  className={cx({
+                    [styles.selectedAnswer]:
+                      option.value === (answer as string) || (answer as string[]).includes(option.value),
+                  })}
+                  htmlFor={`${option.name}`}
+                >
                   {option.value}
                 </label>
               )}

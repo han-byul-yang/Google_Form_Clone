@@ -65,3 +65,16 @@
   height: 20px;
   fill: colors.$NOTICE;
 }
+
+.deleteAnswers {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  color: colors.$KEY;
+  transition: 0.2s;
+
+  &:hover {
+    background: colors.$SUBKEY_02;
+  }
+}

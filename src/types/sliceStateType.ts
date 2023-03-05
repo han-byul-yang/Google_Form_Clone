@@ -15,7 +15,7 @@ export interface QuestionInfo {
   essential: boolean
   options: QuestionOptionState[]
   etcOption: QuestionEtcOptionState
-  answer: string
+  answer: string | string[]
 }
 
 export interface QuestionState {

@@ -22,7 +22,7 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ option }: DropdownProps) => {
-  return <p>{option?.name}</p>
+  return <p>{option?.name.slice(2)}</p>
 }
 
 const ChoosingDropdown = (props: ChoosingDropdownProps, { option }: ChoosingOptionsChildrenProps) => {

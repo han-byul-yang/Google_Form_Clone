@@ -20,8 +20,8 @@ const AnswerOption = ({ questionInfo, formIndex }: AnswerOptionProps) => {
   const { type: answerType, options: answerOptions } = questionInfo
 
   const answerOptionComponents = {
-    단답형: <ShortText type='answer' answer={answer} />,
-    장문형: <LongText type='answer' answer={answer} />,
+    단답형: <ShortText type='answer' answer={answer as string} />,
+    장문형: <LongText type='answer' answer={answer as string} />,
     '객관식 질문': <Objective type='answer' options={answerOptions} formIndex={formIndex} />,
     체크박스: <CheckBox type='answer' formIndex={formIndex} options={answerOptions} />,
     드롭다운: <Dropdown type='answer' formIndex={formIndex} options={answerOptions} />,

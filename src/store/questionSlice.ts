@@ -40,6 +40,7 @@ const questionSlice = createSlice({
     addType: (state, action) => {
       const { index, type } = action.payload
       state.questionInfos[index].type = type
+      if (type === '체크박스') state.questionInfos[index].answer = ['']
     },
     addOption: (state, action) => {
       const { index, option } = action.payload
@@ -76,6 +77,10 @@ const questionSlice = createSlice({
     setAnswer: (state, action) => {
       const { index, answer } = action.payload
       state.questionInfos[index].answer = answer
+    },
+    deleteAllAnswers: (state) => {
+      const deletedAnswers = state.questionInfos.map((info) => ({ ...info, answer: '' }))
+      state.questionInfos = deletedAnswers
     },
   },
 })

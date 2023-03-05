@@ -24,16 +24,17 @@ interface ChoosingOptionsChildrenProps {
 }
 
 interface CheckBoxProps {
+  formIndex: number
   option: QuestionOptionState
   type: string
   handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const CheckBox = ({ option, type, handlePreviewOptionChange }: CheckBoxProps) => {
+const CheckBox = ({ formIndex, option, type, handlePreviewOptionChange }: CheckBoxProps) => {
   return (
     <input
       type='checkbox'
-      id={`${option?.name}`}
+      id={`${formIndex}-${option?.name}`}
       name={`${option?.name}`}
       value={`${option?.value}`}
       onChange={handlePreviewOptionChange}
@@ -43,11 +44,16 @@ const CheckBox = ({ option, type, handlePreviewOptionChange }: CheckBoxProps) =>
 }
 
 const ChoosingCheckBox = (props: ChoosingCheckBoxProps, { option }: ChoosingOptionsChildrenProps) => {
-  const { type, handlePreviewOptionChange } = props
+  const { formIndex, type, handlePreviewOptionChange } = props
 
   return (
     <ChoosingOptions {...props}>
-      <CheckBox option={option} type={type} handlePreviewOptionChange={handlePreviewOptionChange} />
+      <CheckBox
+        formIndex={formIndex}
+        option={option}
+        type={type}
+        handlePreviewOptionChange={handlePreviewOptionChange}
+      />
     </ChoosingOptions>
   )
 }

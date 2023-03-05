@@ -34,7 +34,7 @@ const Objective = ({ option, formIndex, type, handlePreviewOptionChange }: Objec
   return (
     <input
       type='radio'
-      id={`${option?.name}`}
+      id={`${formIndex}-${option?.name}`}
       name={`${formIndex}`}
       value={`${option?.value}`}
       onChange={handlePreviewOptionChange}
