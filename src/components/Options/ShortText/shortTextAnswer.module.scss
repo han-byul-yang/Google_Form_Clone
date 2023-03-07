@@ -7,4 +7,8 @@
   line-height: 30px;
   color: colors.$FONT;
   border-bottom: 1px dotted colors.$GRAY_03;
+
+  &:focus {
+    border-bottom: 2px solid colors.$KEY;
+  }
 }

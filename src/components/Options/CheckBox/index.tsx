@@ -44,7 +44,7 @@ const CheckBox = ({ formIndex, option, type, answer, etcAnswer, handleCheckBoxPr
       value={`${option?.value}`}
       onChange={handleCheckBoxPreviewChange}
       checked={option?.name ? answer?.includes(option?.value) : !!etcAnswer}
-      disabled={type === 'question' || type === 'answer'}
+      disabled={type === 'question' || type === 'noTarget' || type === 'answer'}
     />
   )
 }

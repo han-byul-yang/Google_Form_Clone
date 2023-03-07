@@ -12,4 +12,8 @@
   background: none;
   border: none;
   border-bottom: 1px dotted colors.$GRAY_03;
+
+  &:focus {
+    border-bottom: 2px solid colors.$KEY;
+  }
 }
