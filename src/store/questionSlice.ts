@@ -12,6 +12,7 @@ const initialState = {
       options: [{ name: '옵션1', value: '옵션1' }],
       etcOption: { name: '기타', value: false },
       answer: '',
+      etcAnswer: '',
     },
   ],
 } as QuestionState
@@ -40,7 +41,7 @@ const questionSlice = createSlice({
     addType: (state, action) => {
       const { index, type } = action.payload
       state.questionInfos[index].type = type
-      if (type === '체크박스') state.questionInfos[index].answer = ['']
+      if (type === '체크박스') state.questionInfos[index].answer = []
     },
     addOption: (state, action) => {
       const { index, option } = action.payload
@@ -78,10 +79,18 @@ const questionSlice = createSlice({
       const { index, answer } = action.payload
       state.questionInfos[index].answer = answer
     },
+    setEtcAnswer: (state, action) => {
+      const { index, etcAnswer } = action.payload
+      state.questionInfos[index].etcAnswer = etcAnswer
+    },
+    deleteAnswer: (state, action) => {
+      const { index } = action.payload
+      state.questionInfos[index].answer = ''
+    },
     deleteAllAnswers: (state) => {
       const deletedAnswers = state.questionInfos.map((info) => {
-        if (typeof info.answer === 'string') return { ...info, answer: '' }
-        return { ...info, answer: [''] }
+        if (typeof info.answer === 'string') return { ...info, answer: '', etcAnswer: '' }
+        return { ...info, answer: [], etcAnswer: '' }
       })
       state.questionInfos = deletedAnswers
     },
@@ -101,6 +110,8 @@ export const {
   deleteEtcOption,
   setEssential,
   setAnswer,
+  setEtcAnswer,
+  deleteAnswer,
   deleteAllAnswers,
 } = questionSlice.actions
 export default questionSlice

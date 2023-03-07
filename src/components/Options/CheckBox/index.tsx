@@ -13,8 +13,10 @@ interface ChoosingCheckBoxProps {
   formIndex: number
   options: QuestionOptionState[]
   answer?: string[]
+  etcAnswer?: string
   sameOptionError?: { place: string; error: boolean }
-  handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  handleCheckBoxPreviewChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  handleEtcAnswerChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleDeleteQuestionOptionClick?: (name: string) => void
   handleDeleteEtcClick?: () => void
@@ -29,25 +31,26 @@ interface CheckBoxProps {
   option: QuestionOptionState
   type: string
   answer?: string[]
-  handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  etcAnswer?: string
+  handleCheckBoxPreviewChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const CheckBox = ({ formIndex, option, type, answer, handlePreviewOptionChange }: CheckBoxProps) => {
+const CheckBox = ({ formIndex, option, type, answer, etcAnswer, handleCheckBoxPreviewChange }: CheckBoxProps) => {
   return (
     <input
       type='checkbox'
       id={`${formIndex}-${option?.name}`}
       name={`${option?.name}`}
       value={`${option?.value}`}
-      onChange={handlePreviewOptionChange}
-      checked={answer?.includes(option.value)}
+      onChange={handleCheckBoxPreviewChange}
+      checked={option?.name ? answer?.includes(option?.value) : !!etcAnswer}
       disabled={type === 'question' || type === 'answer'}
     />
   )
 }
 
 const ChoosingCheckBox = (props: ChoosingCheckBoxProps, { option }: ChoosingOptionsChildrenProps) => {
-  const { formIndex, type, answer, handlePreviewOptionChange } = props
+  const { formIndex, type, answer, etcAnswer, handleCheckBoxPreviewChange } = props
 
   return (
     <ChoosingOptions {...props}>
@@ -56,7 +59,8 @@ const ChoosingCheckBox = (props: ChoosingCheckBoxProps, { option }: ChoosingOpti
         option={option}
         type={type}
         answer={answer}
-        handlePreviewOptionChange={handlePreviewOptionChange}
+        etcAnswer={etcAnswer}
+        handleCheckBoxPreviewChange={handleCheckBoxPreviewChange}
       />
     </ChoosingOptions>
   )

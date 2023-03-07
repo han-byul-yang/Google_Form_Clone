@@ -16,6 +16,7 @@ export interface QuestionInfo {
   options: QuestionOptionState[]
   etcOption: QuestionEtcOptionState
   answer: string | string[]
+  etcAnswer: string
 }
 
 export interface QuestionState {

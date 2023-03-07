@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { QuestionInfo } from 'types/sliceStateType'
 import { RootState } from 'store'
-import { addType, setAnswer } from 'store/questionSlice'
+import { addType, deleteAnswer, setAnswer, setEtcAnswer } from 'store/questionSlice'
 import CheckBox from '../../../components/Options/CheckBox'
 import LongText from '../../../components/Options/LongText'
 import Objective from '../../../components/Options/Objective'
@@ -19,7 +19,7 @@ interface PreviewOptionProps {
 
 const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
   const [checkedOptionValue, setCheckedOptionValue] = useState(false)
-  const { answer } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+  const { answer, etcAnswer } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
   const { type: previewType, options: previewOptions } = questionInfo
   const optionValues = previewOptions.map((option) => option.value)
@@ -54,6 +54,11 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
     dispatch(setAnswer({ index: formIndex, answer: answers }))
   }
 
+  const handleEtcAnswerChange = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(deleteAnswer({ index: formIndex }))
+    dispatch(setEtcAnswer({ index: formIndex, etcAnswer: e.currentTarget.value }))
+  }
+
   const previewOptionComponents = {
     단답형: (
       <ShortText type='preview' handlePreviewOptionChange={handleShortTextPreviewChange} answer={answer as string} />
@@ -67,7 +72,9 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
         formIndex={formIndex}
         options={previewOptions}
         answer={answer as string}
+        etcAnswer={etcAnswer}
         handlePreviewOptionChange={handleChoosePreviewChange}
+        handleEtcAnswerChange={handleEtcAnswerChange}
       />
     ),
     체크박스: (
@@ -76,7 +83,9 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
         formIndex={formIndex}
         options={previewOptions}
         answer={answer as string[]}
-        handlePreviewOptionChange={handleCheckBoxPreviewChange}
+        etcAnswer={etcAnswer}
+        handleCheckBoxPreviewChange={handleCheckBoxPreviewChange}
+        handleEtcAnswerChange={handleEtcAnswerChange}
       />
     ),
     드롭다운: (

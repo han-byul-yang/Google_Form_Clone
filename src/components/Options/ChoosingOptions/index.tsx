@@ -14,6 +14,7 @@ interface ChoosingOptionsProps {
   formIndex: number
   options: QuestionOptionState[]
   sameOptionError?: { place: string; error: boolean }
+  handleEtcAnswerChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleDeleteQuestionOptionClick?: (name: string) => void
   handleDeleteEtcClick?: () => void
@@ -25,11 +26,12 @@ const ChoosingOptions = ({
   formIndex,
   options,
   sameOptionError,
+  handleEtcAnswerChange,
   handleQuestionOptionChange,
   handleDeleteQuestionOptionClick,
   handleDeleteEtcClick,
 }: ChoosingOptionsProps) => {
-  const { etcOption, answer } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+  const { etcOption, answer, etcAnswer } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
 
   return (
     <ul className={styles.checkBox}>
@@ -68,7 +70,14 @@ const ChoosingOptions = ({
       {etcOption.value && (
         <li className={styles.etcOption}>
           {cloneElement(children)}
-          <input type='text' placeholder='기타...' disabled={type === 'question' || type === 'answer'} />
+          <input
+            type='text'
+            className={cx({ [styles.etcActive]: type === 'answer' && !!etcAnswer })}
+            placeholder='기타...'
+            value={etcAnswer}
+            disabled={type === 'question' || type === 'answer'}
+            onChange={handleEtcAnswerChange}
+          />
           {type === 'question' && <XIcon className={styles.xIcon} onClick={handleDeleteEtcClick} />}
         </li>
       )}
