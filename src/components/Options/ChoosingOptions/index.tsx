@@ -37,7 +37,7 @@ const ChoosingOptions = ({
     <ul className={styles.checkBox}>
       {options.map((option, index) => {
         return (
-          <li key={option.name} className={styles.checkBoxItem}>
+          <li key={option.value} className={styles.checkBoxItem}>
             <div className={styles.valueInput}>
               {cloneElement(children, { option })}
               {type === 'preview' && <label htmlFor={`${formIndex}-${option.name}`}>{option.value}</label>}

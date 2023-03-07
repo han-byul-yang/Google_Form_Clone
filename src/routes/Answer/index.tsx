@@ -20,7 +20,7 @@ const Answer = () => {
                 {questionInfo.essential && <p className={styles.essential}>*</p>}
               </div>
               {!questionInfo.etcAnswer && (!questionInfo.answer.length || !questionInfo.answer) ? (
-                <p className={styles.noAnswer}>* 무응답</p>
+                <p className={styles.noAnswer}>* 미응답</p>
               ) : (
                 <AnswerOption questionInfo={questionInfo} formIndex={index} />
               )}
