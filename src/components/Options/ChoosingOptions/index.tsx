@@ -41,12 +41,16 @@ const ChoosingOptions = ({
             <div className={styles.valueInput}>
               {cloneElement(children, { option })}
               {type === 'preview' && <label htmlFor={`${formIndex}-${option.name}`}>{option.value}</label>}
-              {type === 'answer' && (
+              {(type === 'answer' || type === 'noTarget') && (
                 <label
-                  className={cx({
-                    [styles.selectedAnswer]:
-                      option.value === (answer as string) || (answer as string[]).includes(option.value),
-                  })}
+                  className={
+                    type === 'answer'
+                      ? cx({
+                          [styles.selectedAnswer]:
+                            option.value === (answer as string) || (answer as string[]).includes(option.value),
+                        })
+                      : undefined
+                  }
                   htmlFor={`${option.name}`}
                 >
                   {option.value}
@@ -74,7 +78,7 @@ const ChoosingOptions = ({
             type='text'
             className={cx({ [styles.etcActive]: type === 'answer' && !!etcAnswer })}
             placeholder='기타...'
-            value={etcAnswer}
+            value={type === 'noTarget' || type === 'question' ? '' : etcAnswer}
             disabled={type === 'question' || type === 'answer'}
             onChange={handleEtcAnswerChange}
           />

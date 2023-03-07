@@ -1,0 +1,6 @@
+@use '../../../styles/mixins/form';
+
+.noTargetedForm {
+  @include form.containerForm;
+  width: 100%;
+}

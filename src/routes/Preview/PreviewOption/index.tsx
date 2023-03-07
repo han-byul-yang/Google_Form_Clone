@@ -1,9 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { QuestionInfo } from 'types/sliceStateType'
 import { RootState } from 'store'
-import { addType, deleteAnswer, setAnswer, setEtcAnswer } from 'store/questionSlice'
+import { deleteAnswer, setAnswer, setEtcAnswer } from 'store/questionSlice'
 import CheckBox from '../../../components/Options/CheckBox'
 import LongText from '../../../components/Options/LongText'
 import Objective from '../../../components/Options/Objective'
@@ -18,7 +18,6 @@ interface PreviewOptionProps {
 }
 
 const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
-  const [checkedOptionValue, setCheckedOptionValue] = useState(false)
   const { answer, etcAnswer } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
   const { type: previewType, options: previewOptions } = questionInfo

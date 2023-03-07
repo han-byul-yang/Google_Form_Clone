@@ -44,7 +44,7 @@ const Objective = ({ option, formIndex, type, answer, etcAnswer, handlePreviewOp
       value={`${option?.value}`}
       onChange={handlePreviewOptionChange}
       checked={option?.name ? option?.value === answer : !!etcAnswer}
-      disabled={type === 'question' || type === 'answer'}
+      disabled={type === 'question' || type === 'noTarget' || type === 'answer'}
     />
   )
 }

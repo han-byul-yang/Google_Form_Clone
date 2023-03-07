@@ -7,7 +7,7 @@ import { RootState } from 'store'
 import Title from './Title'
 import Question from './Question'
 import AddQuestionBar from './AddQuestionBar'
-import AnswerOption from 'routes/Answer/AnswerOption'
+import QuestionNoTargetedForm from './QuestionNoTargetedForm'
 
 import { EyeIcon } from 'assets/svgs'
 import styles from './main.module.scss'
@@ -54,10 +54,7 @@ const Main = () => {
                   {targetedForm === questionInfo.id ? (
                     <Question formIndex={index} />
                   ) : (
-                    <div className={styles.questionAnsweritem}>
-                      <p className={styles.questionTitle}>{questionInfo.title}</p>
-                      <AnswerOption questionInfo={questionInfo} formIndex={index} />
-                    </div>
+                    <QuestionNoTargetedForm questionInfo={questionInfo} formIndex={index} />
                   )}
                 </li>
               )
