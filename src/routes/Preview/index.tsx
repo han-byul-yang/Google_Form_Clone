@@ -12,8 +12,7 @@ import { WarningIcon } from 'assets/svgs'
 import styles from './preview.module.scss'
 
 const Preview = () => {
-  //  const [targetedForms, setTargetedForms] = useState([{ id: 0, essential: false, answer: '', noAnswerError: false }])
-  // const [noAnswerError, setNoAnswerError] = useState(false)
+  const [firstErrorIndex, setFirstErrorIndex] = useState(-1)
   const { title, description } = useSelector((state: RootState) => state.title.titleInfo)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
   const dispatch = useDispatch()
@@ -38,12 +37,12 @@ const Preview = () => {
     return () => removeClickOutsideEvent()
   }, [clickOutsideEvent, removeClickOutsideEvent])
 
-  const handleInsideClick = (index: number, essential: boolean, answer: string | string[]) => {
-    // targetedFormId.current = id
+  useEffect(() => {
+    if (firstErrorIndex !== -1) document.getElementById('scroll')?.scrollIntoView({ behavior: 'smooth' })
+  }, [firstErrorIndex])
+
+  const handleInsideClick = (index: number) => {
     settargetedFormIndex(index)
-    console.log('inside', index)
-    // if (targetedForms.map((prevForms) => prevForms.id).includes(id)) return
-    // setTargetedForms((prevForms) => [...prevForms, { id, essential, answer, noAnswerError: false }])
   }
 
   const handleAnswerDeleteClick = () => {
@@ -51,7 +50,12 @@ const Preview = () => {
   }
 
   const handleSubmitClick = () => {
-    navigate('/answer')
+    const noAnswerErrors = questionInfos.filter((info) => info.essential && !info.answer && !info.etcAnswer)
+    const findFirstErrorIndex = questionInfos.findIndex((info) => info.essential && !info.answer && !info.etcAnswer)
+    if (!noAnswerErrors.length) navigate('/answer')
+    else {
+      setFirstErrorIndex(findFirstErrorIndex)
+    }
   }
 
   return (
@@ -63,15 +67,16 @@ const Preview = () => {
       </div>
       <ul className={styles.questionPreviews}>
         {questionInfos.map((questionInfo, index) => {
-          const { essential, answer, noAnswerError } = questionInfo
+          const { noAnswerError } = questionInfo
           const questionInfoKey = `questionInfo-${index}`
           return (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <li
               key={questionInfoKey}
               className={cx(styles.questionPreviewItem, { [styles.essentialWarning]: noAnswerError })}
+              id={firstErrorIndex === index ? 'scroll' : undefined}
               ref={index === targetedFormIndex ? targetRef : null}
-              onClick={() => handleInsideClick(index, essential, answer)}
+              onClick={() => handleInsideClick(index)}
             >
               <div className={styles.questionTitleBox}>
                 <p className={styles.questionTitle}>{questionInfo.title}</p>
