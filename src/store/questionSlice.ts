@@ -79,7 +79,10 @@ const questionSlice = createSlice({
       state.questionInfos[index].answer = answer
     },
     deleteAllAnswers: (state) => {
-      const deletedAnswers = state.questionInfos.map((info) => ({ ...info, answer: '' }))
+      const deletedAnswers = state.questionInfos.map((info) => {
+        if (typeof info.answer === 'string') return { ...info, answer: '' }
+        return { ...info, answer: [''] }
+      })
       state.questionInfos = deletedAnswers
     },
   },
@@ -98,5 +101,6 @@ export const {
   deleteEtcOption,
   setEssential,
   setAnswer,
+  deleteAllAnswers,
 } = questionSlice.actions
 export default questionSlice

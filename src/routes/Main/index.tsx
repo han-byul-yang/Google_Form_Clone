@@ -56,7 +56,7 @@ const Main = () => {
                   ) : (
                     <div className={styles.questionAnsweritem}>
                       <p className={styles.questionTitle}>{questionInfo.title}</p>
-                      <AnswerOption questionInfo={questionInfo} formIndex={formIndex} />
+                      <AnswerOption questionInfo={questionInfo} formIndex={index} />
                     </div>
                   )}
                 </li>

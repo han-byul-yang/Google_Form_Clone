@@ -11,7 +11,7 @@ interface QuestionAddProps {
 }
 
 const QuestionAdd = ({ formIndex }: QuestionAddProps) => {
-  const { etcOption } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+  const { etcOption, type: questionType } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
   const optionCountRef = useRef(1)
 
@@ -30,7 +30,7 @@ const QuestionAdd = ({ formIndex }: QuestionAddProps) => {
       <button type='button' className={styles.addOption} onClick={handleAddOptionClick}>
         옵션 추가
       </button>
-      {!etcOption.value && (
+      {!etcOption.value && questionType !== '드롭다운' && (
         <button type='button' className={styles.addEtc} onClick={handleAddEtcClick}>
           &apos;기타&apos; 추가
         </button>

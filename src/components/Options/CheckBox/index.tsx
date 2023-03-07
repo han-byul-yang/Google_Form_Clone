@@ -12,6 +12,7 @@ interface ChoosingCheckBoxProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
+  answer?: string[]
   sameOptionError?: { place: string; error: boolean }
   handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -27,10 +28,11 @@ interface CheckBoxProps {
   formIndex: number
   option: QuestionOptionState
   type: string
+  answer?: string[]
   handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const CheckBox = ({ formIndex, option, type, handlePreviewOptionChange }: CheckBoxProps) => {
+const CheckBox = ({ formIndex, option, type, answer, handlePreviewOptionChange }: CheckBoxProps) => {
   return (
     <input
       type='checkbox'
@@ -38,13 +40,14 @@ const CheckBox = ({ formIndex, option, type, handlePreviewOptionChange }: CheckB
       name={`${option?.name}`}
       value={`${option?.value}`}
       onChange={handlePreviewOptionChange}
+      checked={answer?.includes(option.value)}
       disabled={type === 'question' || type === 'answer'}
     />
   )
 }
 
 const ChoosingCheckBox = (props: ChoosingCheckBoxProps, { option }: ChoosingOptionsChildrenProps) => {
-  const { formIndex, type, handlePreviewOptionChange } = props
+  const { formIndex, type, answer, handlePreviewOptionChange } = props
 
   return (
     <ChoosingOptions {...props}>
@@ -52,6 +55,7 @@ const ChoosingCheckBox = (props: ChoosingCheckBoxProps, { option }: ChoosingOpti
         formIndex={formIndex}
         option={option}
         type={type}
+        answer={answer}
         handlePreviewOptionChange={handlePreviewOptionChange}
       />
     </ChoosingOptions>

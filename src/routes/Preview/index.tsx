@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import useClickOutside from 'hooks/useClickOutside'
 import { RootState } from 'store'
+import { deleteAllAnswers } from 'store/questionSlice'
 import PreviewOption from './PreviewOption'
 
 import { WarningIcon } from 'assets/svgs'
@@ -14,6 +15,7 @@ const Preview = () => {
   // const [noAnswerError, setNoAnswerError] = useState(false)
   const { title, description } = useSelector((state: RootState) => state.title.titleInfo)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const targetRef = useRef(null)
   const targetedFormId = useRef(0)
@@ -29,10 +31,14 @@ const Preview = () => {
     clickOutsideEvent()
   }, [clickOutsideEvent]) */
 
-  const handleInsideClick = (id: number, essential: boolean, answer: string) => {
+  const handleInsideClick = (id: number, essential: boolean, answer: string | string[]) => {
     targetedFormId.current = id
-    if (targetedForms.map((prevForms) => prevForms.id).includes(id)) return
-    setTargetedForms((prevForms) => [...prevForms, { id, essential, answer, noAnswerError: false }])
+    // if (targetedForms.map((prevForms) => prevForms.id).includes(id)) return
+    // setTargetedForms((prevForms) => [...prevForms, { id, essential, answer, noAnswerError: false }])
+  }
+
+  const handleAnswerDeleteClick = () => {
+    dispatch(deleteAllAnswers())
   }
 
   const handleSubmitClick = () => {
@@ -75,6 +81,9 @@ const Preview = () => {
       </ul>
       <button type='button' className={styles.submitButton} onClick={handleSubmitClick}>
         제출
+      </button>
+      <button type='button' className={styles.deleteAnswers} onClick={handleAnswerDeleteClick}>
+        양식 지우기
       </button>
     </form>
   )

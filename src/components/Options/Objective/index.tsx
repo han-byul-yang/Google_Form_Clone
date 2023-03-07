@@ -12,6 +12,7 @@ interface ChoosingObjectiveProps {
   type: string
   formIndex: number
   options: QuestionOptionState[]
+  answer?: string
   sameOptionError?: { place: string; error: boolean }
   handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
   handleQuestionOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -27,10 +28,11 @@ interface ObjectiveProps {
   option: QuestionOptionState
   formIndex: number
   type: string
+  answer?: string
   handlePreviewOptionChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const Objective = ({ option, formIndex, type, handlePreviewOptionChange }: ObjectiveProps) => {
+const Objective = ({ option, formIndex, type, answer, handlePreviewOptionChange }: ObjectiveProps) => {
   return (
     <input
       type='radio'
@@ -38,13 +40,14 @@ const Objective = ({ option, formIndex, type, handlePreviewOptionChange }: Objec
       name={`${formIndex}`}
       value={`${option?.value}`}
       onChange={handlePreviewOptionChange}
+      checked={option.value === answer}
       disabled={type === 'question' || type === 'answer'}
     />
   )
 }
 
 const ChoosingObjective = (props: ChoosingObjectiveProps, { option }: ChoosingOptionsChildrenProps) => {
-  const { type, formIndex, handlePreviewOptionChange } = props
+  const { type, formIndex, answer, handlePreviewOptionChange } = props
 
   return (
     <ChoosingOptions {...props}>
@@ -52,6 +55,7 @@ const ChoosingObjective = (props: ChoosingObjectiveProps, { option }: ChoosingOp
         option={option}
         formIndex={formIndex}
         type={type}
+        answer={answer}
         handlePreviewOptionChange={handlePreviewOptionChange}
       />
     </ChoosingOptions>
