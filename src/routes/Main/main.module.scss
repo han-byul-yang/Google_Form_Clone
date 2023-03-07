@@ -57,6 +57,16 @@
   width: 100%;
 }
 
+.targetedItem {
+  margin-bottom: 20px;
+  border-left: 7px solid colors.$NOTICE;
+  border-radius: 8px;
+
+  form {
+    margin-bottom: 0;
+  }
+}
+
 .barContainer {
   position: relative;
   height: 100%;

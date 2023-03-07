@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import cx from 'classnames'
 
 import useClickTarget from 'hooks/useClickOutside'
 import { RootState } from 'store'
@@ -47,7 +48,7 @@ const Main = () => {
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                 <li
                   key={questionInfo.id}
-                  className={styles.questionItem}
+                  className={cx(styles.questionItem, { [styles.targetedItem]: targetedForm === questionInfo.id })}
                   ref={targetRef}
                   onClick={() => handleInsideClick(index, questionInfo.id)}
                 >
