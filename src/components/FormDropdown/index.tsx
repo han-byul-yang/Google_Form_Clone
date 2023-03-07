@@ -26,11 +26,13 @@ const FormDropdown = ({ items, icons, selectedState, action }: FormDropdownProps
   const clickOutsideHandle = () => {
     setIsOpenDropdown(false)
   }
-  const { clickOutsideEvent } = useClickOutside({ targetRef, clickOutsideHandle })
+  const { clickOutsideEvent, removeClickOutsideEvent } = useClickOutside({ targetRef, clickOutsideHandle })
 
   useEffect(() => {
     clickOutsideEvent()
-  }, [clickOutsideEvent])
+
+    return () => removeClickOutsideEvent()
+  }, [clickOutsideEvent, removeClickOutsideEvent])
 
   const handleOpenDropdownClick = () => {
     setIsOpenDropdown(true)

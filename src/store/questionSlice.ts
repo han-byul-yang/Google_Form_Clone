@@ -13,6 +13,7 @@ const initialState = {
       etcOption: { name: '기타', value: false },
       answer: '',
       etcAnswer: '',
+      noAnswerError: false,
     },
   ],
 } as QuestionState
@@ -94,6 +95,18 @@ const questionSlice = createSlice({
       })
       state.questionInfos = deletedAnswers
     },
+    deleteEtcAnswer: (state, action) => {
+      const { index } = action.payload
+      state.questionInfos[index].etcAnswer = ''
+    },
+    setNoAnswerError: (state, action) => {
+      const { index } = action.payload
+      state.questionInfos[index].noAnswerError = true
+    },
+    setDeleteAnswerError: (state, action) => {
+      const { index } = action.payload
+      state.questionInfos[index].noAnswerError = false
+    },
   },
 })
 
@@ -113,5 +126,8 @@ export const {
   setEtcAnswer,
   deleteAnswer,
   deleteAllAnswers,
+  deleteEtcAnswer,
+  setNoAnswerError,
+  setDeleteAnswerError,
 } = questionSlice.actions
 export default questionSlice

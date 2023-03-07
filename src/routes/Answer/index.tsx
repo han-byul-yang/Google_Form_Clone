@@ -13,9 +13,8 @@ const Answer = () => {
       <p className={styles.titleAnswer}>* 사용자 답변 내용 *</p>
       <ul className={styles.questionAnswers}>
         {questionInfos.map((questionInfo, index) => {
-          const questionInfoKey = `questionInfo-${index}`
           return (
-            <li key={questionInfoKey} className={styles.questionAnswerItem}>
+            <li key={questionInfo.id} className={styles.questionAnswerItem}>
               <div className={styles.questionTitleBox}>
                 <p className={styles.questionTitle}>{questionInfo.title}</p>
                 {questionInfo.essential && <p className={styles.essential}>*</p>}

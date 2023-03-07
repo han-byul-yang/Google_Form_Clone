@@ -17,6 +17,7 @@ export interface QuestionInfo {
   etcOption: QuestionEtcOptionState
   answer: string | string[]
   etcAnswer: string
+  noAnswerError: boolean
 }
 
 export interface QuestionState {

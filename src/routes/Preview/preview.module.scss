@@ -43,6 +43,10 @@
   width: 100%;
 }
 
+.essentialWarning {
+  border: 2px solid colors.$NOTICE;
+}
+
 .questionTitleBox {
   display: flex;
   align-items: center;
@@ -52,18 +56,29 @@
   color: colors.$NOTICE;
 }
 
+.essentialOption {
+  display: flex;
+  align-items: center;
+
+  p {
+    font-size: 13px;
+    color: colors.$NOTICE;
+  }
+}
+
+.warningIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  fill: colors.$NOTICE;
+}
+
 .submitButton {
   align-self: start;
   padding: 10px 25px;
   color: colors.$WHITE;
   background: colors.$KEY;
   border-radius: 8px;
-}
-
-.warningIcon {
-  width: 20px;
-  height: 20px;
-  fill: colors.$NOTICE;
 }
 
 .deleteAnswers {
