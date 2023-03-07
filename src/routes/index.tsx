@@ -1,9 +1,11 @@
+import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Main from './Main'
-import Preview from './Preview'
-import Answer from './Answer'
 import Layout from 'components/Layout'
+
+const Preview = lazy(() => import('./Preview'))
+const Answer = lazy(() => import('./Answer'))
 
 const App = () => {
   return (
