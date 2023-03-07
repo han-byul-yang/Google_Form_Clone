@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { QuestionInfo } from 'types/sliceStateType'
 import { RootState } from 'store'
-import { deleteAnswer, setAnswer, setEtcAnswer } from 'store/questionSlice'
+import { deleteAnswer, setAnswer, deleteEtcAnswer, setEtcAnswer } from 'store/questionSlice'
 import CheckBox from '../../../components/Options/ChoosingOptions/CheckBox'
 import LongText from '../../../components/Options/LongText'
 import Objective from '../../../components/Options/ChoosingOptions/Objective'
@@ -37,7 +37,10 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
   }
 
   const handleChoosePreviewChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPreviewChange(e)
+    if (e.currentTarget.checked) {
+      setPreviewChange(e)
+      dispatch(deleteEtcAnswer({ index: formIndex }))
+    }
   }
 
   const handleCheckBoxPreviewChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +58,10 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
 
   const handleEtcAnswerChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(deleteAnswer({ index: formIndex }))
+    dispatch(setEtcAnswer({ index: formIndex, etcAnswer: e.currentTarget.value }))
+  }
+
+  const handleEtcAnswersChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setEtcAnswer({ index: formIndex, etcAnswer: e.currentTarget.value }))
   }
 
@@ -84,7 +91,7 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
         answer={answer as string[]}
         etcAnswer={etcAnswer}
         handleCheckBoxPreviewChange={handleCheckBoxPreviewChange}
-        handleEtcAnswerChange={handleEtcAnswerChange}
+        handleEtcAnswerChange={handleEtcAnswersChange}
       />
     ),
     드롭다운: <FormDropdown items={optionValues} selectedState={answer as string} action={dropdownAction} />,

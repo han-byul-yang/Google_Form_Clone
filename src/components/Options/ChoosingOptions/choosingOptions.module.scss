@@ -36,12 +36,14 @@
 .etcOption {
   display: flex;
   align-items: center;
+  margin: 3px;
 
   input[type='text'] {
+    display: block;
     width: 100%;
     padding: 10px 5px;
     margin-left: 5px;
-    font-size: 14px;
+    font-size: 15px;
     color: colors.$FONT;
 
     &:hover {

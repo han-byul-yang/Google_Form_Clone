@@ -61,7 +61,7 @@ const Preview = () => {
             <li
               key={questionInfoKey}
               className={styles.questionPreviewItem}
-              // ref={id === targetedForm.id ? targetRef : null}
+              ref={targetRef}
               onClick={() => handleInsideClick(id, essential, answer)}
             >
               <div className={styles.questionTitleBox}>

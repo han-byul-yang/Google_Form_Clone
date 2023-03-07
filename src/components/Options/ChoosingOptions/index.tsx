@@ -79,7 +79,7 @@ const ChoosingOptions = ({
             className={cx({ [styles.etcActive]: type === 'answer' && !!etcAnswer })}
             placeholder='기타...'
             value={type === 'noTarget' || type === 'question' ? '' : etcAnswer}
-            disabled={type === 'question' || type === 'answer'}
+            disabled={type === 'question' || type === 'noTarget' || type === 'answer'}
             onChange={handleEtcAnswerChange}
           />
           {type === 'question' && <XIcon className={styles.xIcon} onClick={handleDeleteEtcClick} />}
