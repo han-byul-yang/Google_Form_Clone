@@ -35,7 +35,6 @@ const Question = ({ formIndex }: QuestionProps) => {
           onChange={handleQuestionInputChange}
         />
         <FormDropdown
-          formIndex={formIndex}
           items={questionTypes}
           icons={questionTypeIcons}
           selectedState={questionType}

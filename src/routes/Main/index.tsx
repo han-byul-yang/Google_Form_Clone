@@ -3,18 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import cx from 'classnames'
 
-import useClickTarget from 'hooks/useClickOutside'
 import { RootState } from 'store'
 import Title from './Title'
 import Question from './Question'
-import AddQuestionBar from './AddQuestionBar'
+import AddQuestion from './AddQuestion'
 import QuestionNoTargetedForm from './QuestionNoTargetedForm'
 
 import { EyeIcon } from 'assets/svgs'
 import styles from './main.module.scss'
 
 const Main = () => {
-  const [targetedItemPlace, setTargetedItemPlace] = useState({ x: 0, y: 0 })
   const [targetedForm, setTargetedForm] = useState(0)
   const [formIndex, setFormIndex] = useState(0)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
@@ -22,10 +20,6 @@ const Main = () => {
   const targetRef = useRef<HTMLLIElement>(null)
 
   const handleInsideClick = (index: number, id: number) => {
-    /* if (targetRef && targetRef.current) {
-      const { width, height } = targetRef.current.getBoundingClientRect()
-      setTargetedItemPlace({ x: width, y: height })
-    } */ // 로직 분리
     setFormIndex(index)
     setTargetedForm(id)
   }
@@ -62,8 +56,8 @@ const Main = () => {
             })}
           </ul>
         </div>
-        <div className={styles.barContainer}>
-          <AddQuestionBar targetedItemPlace={targetedItemPlace} formIndex={formIndex} />
+        <div className={styles.addQuestionContainer}>
+          <AddQuestion formIndex={formIndex} />
         </div>
       </div>
     </>

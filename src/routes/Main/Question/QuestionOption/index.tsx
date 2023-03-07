@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from 'store'
 import { deleteEtcOption, deleteOption, editOption } from 'store/questionSlice'
-import CheckBox from 'components/Options/CheckBox'
-import Dropdown from 'components/Options/Dropdown'
+import CheckBox from 'components/Options/ChoosingOptions/CheckBox'
+import Dropdown from 'components/Options/ChoosingOptions/Dropdown'
 import LongText from 'components/Options/LongText'
-import Objective from 'components/Options/Objective'
+import Objective from 'components/Options/ChoosingOptions/Objective'
 import ShortText from 'components/Options/ShortText'
 import QuestionAdd from './QuestionAdd'
 

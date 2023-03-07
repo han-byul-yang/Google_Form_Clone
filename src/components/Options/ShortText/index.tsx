@@ -1,7 +1,5 @@
 import { FormEvent } from 'react'
 
-import { QuestionOptionState } from 'types/sliceStateType'
-
 import styles from './shortTextAnswer.module.scss'
 
 interface ShortTextProps {

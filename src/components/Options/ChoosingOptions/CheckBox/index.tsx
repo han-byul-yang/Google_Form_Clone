@@ -1,12 +1,7 @@
 import { ChangeEvent } from 'react'
-import { useSelector } from 'react-redux'
 
 import { QuestionOptionState } from 'types/sliceStateType'
-import { RootState } from 'store'
-import ChoosingOptions from '../ChoosingOptions'
-
-import { XIcon } from 'assets/svgs'
-import styles from './checkBoxAnswer.module.scss'
+import ChoosingOptions from '..'
 
 interface ChoosingCheckBoxProps {
   type: string

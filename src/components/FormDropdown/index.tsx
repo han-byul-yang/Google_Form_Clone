@@ -1,15 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import useClickOutside from 'hooks/useClickOutside'
-import { RootState } from 'store'
-import { addType } from 'store/questionSlice'
 
 import styles from './formDropdown.module.scss'
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
 
 interface FormDropdownProps {
-  formIndex: number
   items: string[]
   icons?: (
     type: string,
@@ -21,7 +17,7 @@ interface FormDropdownProps {
   action: any
 }
 
-const FormDropdown = ({ formIndex, items, icons, selectedState, action }: FormDropdownProps) => {
+const FormDropdown = ({ items, icons, selectedState, action }: FormDropdownProps) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const dispatch = useDispatch()

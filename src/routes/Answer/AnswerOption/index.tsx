@@ -2,11 +2,11 @@ import { useSelector } from 'react-redux'
 
 import { QuestionInfo } from 'types/sliceStateType'
 import { RootState } from 'store'
-import CheckBox from '../../../components/Options/CheckBox'
+import CheckBox from '../../../components/Options/ChoosingOptions/CheckBox'
 import LongText from '../../../components/Options/LongText'
-import Objective from '../../../components/Options/Objective'
+import Objective from '../../../components/Options/ChoosingOptions/Objective'
 import ShortText from '../../../components/Options/ShortText'
-import Dropdown from 'components/Options/Dropdown'
+import Dropdown from 'components/Options/ChoosingOptions/Dropdown'
 
 import styles from './answerOption.module.scss'
 

@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
 import { QuestionOptionState } from 'types/sliceStateType'
-import ChoosingOptions from '../ChoosingOptions'
+import ChoosingOptions from '..'
 
 interface ChoosingDropdownProps {
   type: string

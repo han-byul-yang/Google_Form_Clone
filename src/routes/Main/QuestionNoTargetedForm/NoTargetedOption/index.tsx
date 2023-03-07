@@ -1,8 +1,8 @@
 import { QuestionInfo } from 'types/sliceStateType'
-import Dropdown from 'components/Options/Dropdown'
-import Objective from 'components/Options/Objective'
+import Dropdown from 'components/Options/ChoosingOptions/Dropdown'
+import Objective from 'components/Options/ChoosingOptions/Objective'
 import ShortText from 'components/Options/ShortText'
-import CheckBox from 'components/Options/CheckBox'
+import CheckBox from 'components/Options/ChoosingOptions/CheckBox'
 import LongText from 'components/Options/LongText'
 
 import styles from './noTargetedOption.module.scss'
