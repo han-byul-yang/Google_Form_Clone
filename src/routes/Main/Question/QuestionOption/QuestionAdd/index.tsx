@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'store'
@@ -11,13 +10,16 @@ interface OptionAddProps {
 }
 
 const OptionAdd = ({ formIndex }: OptionAddProps) => {
-  const { etcOption, type: questionType } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+  const {
+    options,
+    etcOption,
+    type: questionType,
+  } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
-  const optionCountRef = useRef(1)
 
   const handleAddOptionClick = () => {
-    optionCountRef.current += 1
-    const option = { name: `옵션${optionCountRef.current}`, value: `옵션${optionCountRef.current}` }
+    const prevOptionNumber = Number(options[options.length - 1].name.slice(2, 3))
+    const option = { name: `옵션${prevOptionNumber + 1}`, value: `옵션${prevOptionNumber + 1}` }
     dispatch(addOption({ index: formIndex, option }))
   }
 
