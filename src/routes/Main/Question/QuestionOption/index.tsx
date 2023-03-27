@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from 'store'
@@ -21,10 +21,10 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
   const [sameOptionError, setSameOptionError] = useState({ place: '', error: false })
   const { options: optionsInput } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
-  const optionsInputValues = optionsInput.map((option) => option.value)
 
   const handleQuestionOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget
+    const optionsInputValues = optionsInput.map((option) => option.value)
     if (optionsInputValues.includes(value)) {
       setSameOptionError({ place: name, error: true })
     } else {
@@ -93,4 +93,4 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
   )
 }
 
-export default QuestionOption
+export default memo(QuestionOption)

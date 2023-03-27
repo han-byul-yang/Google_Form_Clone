@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 
 import styles from './longText.module.scss'
 
@@ -20,4 +20,4 @@ const LongText = ({ type, handlePreviewOptionChange, answer }: ShortTextProps) =
   )
 }
 
-export default LongText
+export default memo(LongText)

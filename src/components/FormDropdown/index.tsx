@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import useClickOutside from 'hooks/useClickOutside'
@@ -71,4 +71,4 @@ const FormDropdown = ({ items, icons, selectedState, action }: FormDropdownProps
   )
 }
 
-export default FormDropdown
+export default memo(FormDropdown)

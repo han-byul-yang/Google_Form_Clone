@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from 'store'
@@ -13,7 +13,7 @@ interface QuestionFooterProps {
 
 const QuestionFooter = ({ formIndex }: QuestionFooterProps) => {
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos[formIndex])
-  const newIdQuestionInfos = { ...questionInfos, id: Date.now() }
+  const newIdQuestionInfos = { ...questionInfos, id: Date.now() } // handleCopyFormClick안에 넣기
   const dispatch = useDispatch()
 
   const handleCopyFormClick = () => {
@@ -46,4 +46,4 @@ const QuestionFooter = ({ formIndex }: QuestionFooterProps) => {
   )
 }
 
-export default QuestionFooter
+export default memo(QuestionFooter)

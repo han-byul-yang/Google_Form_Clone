@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { questionTypes, questionTypeIcons } from 'utils/questionTypes'
@@ -47,4 +47,4 @@ const Question = ({ formIndex }: QuestionProps) => {
   )
 }
 
-export default Question
+export default memo(Question)

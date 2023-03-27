@@ -37,7 +37,7 @@ const ChoosingOptions = ({
     <ul className={styles.checkBox}>
       {options.map((option, index) => {
         return (
-          <li key={option.value} className={styles.checkBoxItem}>
+          <li key={option.name} className={styles.checkBoxItem}>
             <div className={styles.valueInput}>
               {cloneElement(children, { option })}
               {type === 'preview' && <label htmlFor={`${formIndex}-${option.name}`}>{option.value}</label>}
@@ -56,7 +56,7 @@ const ChoosingOptions = ({
                   {option.value}
                 </label>
               )}
-              {type === 'question' && handleDeleteQuestionOptionClick && (
+              {type === 'question' && (
                 <input type='text' name={option.name} value={option.value} onChange={handleQuestionOptionChange} />
               )}
             </div>

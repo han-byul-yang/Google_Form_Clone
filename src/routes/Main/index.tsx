@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { memo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import cx from 'classnames'
@@ -64,4 +64,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default memo(Main)

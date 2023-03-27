@@ -22,10 +22,10 @@ const Preview = () => {
 
   const clickOutsideHandle = () => {
     const questionInfo = questionInfos[targetedFormIndex]
-    if (questionInfo?.essential && (!questionInfo.answer || !questionInfo.answer.length || !questionInfo.etcAnswer)) {
+    if (questionInfo.essential && (!questionInfo.answer || !questionInfo.answer.length || !questionInfo.etcAnswer)) {
       dispatch(setNoAnswerError({ index: targetedFormIndex }))
     }
-    if (questionInfo?.essential && (questionInfo.answer || questionInfo.answer.length || questionInfo.etcAnswer)) {
+    if (questionInfo.essential && (questionInfo.answer || questionInfo.answer.length || questionInfo.etcAnswer)) {
       dispatch(setDeleteAnswerError({ index: targetedFormIndex }))
     }
   }

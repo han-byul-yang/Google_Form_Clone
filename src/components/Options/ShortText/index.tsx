@@ -1,4 +1,4 @@
-import { FormEvent } from 'react'
+import { FormEvent, memo } from 'react'
 
 import styles from './shortTextAnswer.module.scss'
 
@@ -21,4 +21,4 @@ const ShortText = ({ type, handlePreviewOptionChange, answer }: ShortTextProps) 
   )
 }
 
-export default ShortText
+export default memo(ShortText)
