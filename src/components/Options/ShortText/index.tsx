@@ -15,7 +15,7 @@ const ShortText = ({ type, handlePreviewOptionChange, answer }: ShortTextProps) 
       type='text'
       value={answer}
       onChange={handlePreviewOptionChange}
-      placeholder={type === 'question' ? '단답형 텍스트' : '내 답변'}
+      placeholder={type === 'question' || type === 'noTarget' ? '단답형 텍스트' : '내 답변'}
       disabled={type === 'question' || type === 'noTarget' || type === 'answer'}
     />
   )

@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from 'store'
@@ -45,4 +45,4 @@ const Title = () => {
   )
 }
 
-export default Title
+export default memo(Title)

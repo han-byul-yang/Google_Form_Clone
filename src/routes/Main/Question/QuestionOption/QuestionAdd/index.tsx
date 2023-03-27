@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'store'
 import { addOption, addEtcOption } from 'store/questionSlice'
 
-import styles from './questionAdd.module.scss'
+import styles from './optionAdd.module.scss'
 
-interface QuestionAddProps {
+interface OptionAddProps {
   formIndex: number
 }
 
-const QuestionAdd = ({ formIndex }: QuestionAddProps) => {
+const OptionAdd = ({ formIndex }: OptionAddProps) => {
   const { etcOption, type: questionType } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
   const optionCountRef = useRef(1)
@@ -39,4 +39,4 @@ const QuestionAdd = ({ formIndex }: QuestionAddProps) => {
   )
 }
 
-export default QuestionAdd
+export default OptionAdd

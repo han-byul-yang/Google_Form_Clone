@@ -1,7 +1,6 @@
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { QuestionInfo } from 'types/sliceStateType'
 import { RootState } from 'store'
 import { deleteAnswer, setAnswer, deleteEtcAnswer, setEtcAnswer } from 'store/questionSlice'
 import CheckBox from '../../../components/Options/ChoosingOptions/CheckBox'
@@ -13,14 +12,17 @@ import FormDropdown from 'components/FormDropdown'
 import styles from './previewOption.module.scss'
 
 interface PreviewOptionProps {
-  questionInfo: QuestionInfo
   formIndex: number
 }
 
-const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
-  const { answer, etcAnswer } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+const PreviewOption = ({ formIndex }: PreviewOptionProps) => {
+  const {
+    type: previewType,
+    options: previewOptions,
+    answer,
+    etcAnswer,
+  } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
-  const { type: previewType, options: previewOptions } = questionInfo
   const optionValues = previewOptions.map((option) => option.value)
   const dropdownAction = (selectedAnswer: string) => setAnswer({ index: formIndex, answer: selectedAnswer })
 
@@ -36,7 +38,7 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
     setPreviewChange(e)
   }
 
-  const handleChoosePreviewChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleObjectivePreviewChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
       setPreviewChange(e)
       dispatch(deleteEtcAnswer({ index: formIndex }))
@@ -79,7 +81,7 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
         options={previewOptions}
         answer={answer as string}
         etcAnswer={etcAnswer}
-        handlePreviewOptionChange={handleChoosePreviewChange}
+        handlePreviewOptionChange={handleObjectivePreviewChange}
         handleEtcAnswerChange={handleEtcAnswerChange}
       />
     ),
@@ -100,4 +102,4 @@ const PreviewOption = ({ questionInfo, formIndex }: PreviewOptionProps) => {
   return <div className={styles.previewOptionContainer}>{previewOptionComponents}</div>
 }
 
-export default PreviewOption
+export default memo(PreviewOption)

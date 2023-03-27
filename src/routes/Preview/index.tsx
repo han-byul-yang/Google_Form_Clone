@@ -13,12 +13,12 @@ import styles from './preview.module.scss'
 
 const Preview = () => {
   const [firstErrorIndex, setFirstErrorIndex] = useState(-1)
+  const [targetedFormIndex, setTargetedFormIndex] = useState(0)
   const { title, description } = useSelector((state: RootState) => state.title.titleInfo)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const targetRef = useRef(null)
-  const [targetedFormIndex, settargetedFormIndex] = useState(0)
 
   const clickOutsideHandle = () => {
     const questionInfo = questionInfos[targetedFormIndex]
@@ -42,7 +42,7 @@ const Preview = () => {
   }, [firstErrorIndex])
 
   const handleInsideClick = (index: number) => {
-    settargetedFormIndex(index)
+    setTargetedFormIndex(index)
   }
 
   const handleAnswerDeleteClick = () => {
@@ -82,7 +82,7 @@ const Preview = () => {
                 <p className={styles.questionTitle}>{questionInfo.title}</p>
                 {questionInfo.essential && <p className={styles.essential}>*</p>}
               </div>
-              <PreviewOption questionInfo={questionInfo} formIndex={index} />
+              <PreviewOption formIndex={index} />
               {noAnswerError && (
                 <div className={styles.essentialOption}>
                   <WarningIcon className={styles.warningIcon} />

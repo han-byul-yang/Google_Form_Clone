@@ -22,7 +22,7 @@ const Answer = () => {
               {!questionInfo.etcAnswer && (!questionInfo.answer.length || !questionInfo.answer) ? (
                 <p className={styles.noAnswer}>* 미응답</p>
               ) : (
-                <AnswerOption questionInfo={questionInfo} formIndex={index} />
+                <AnswerOption formIndex={index} />
               )}
             </li>
           )

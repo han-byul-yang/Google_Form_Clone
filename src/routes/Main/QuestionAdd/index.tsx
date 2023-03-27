@@ -1,19 +1,20 @@
+import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { addQuestionInfo } from 'store/questionSlice'
 
 import { AddIcon } from 'assets/svgs'
-import styles from './addQuestion.module.scss'
+import styles from './questionAdd.module.scss'
 
-interface AddQuestionProps {
+interface QuestionAddProps {
   formIndex: number
 }
 
-const AddQuestion = ({ formIndex }: AddQuestionProps) => {
+const QuestionAdd = ({ formIndex }: QuestionAddProps) => {
   const dispatch = useDispatch()
-  const date = Date.now()
 
   const handleAddQuestionClick = () => {
+    const date = Date.now()
     dispatch(addQuestionInfo({ index: formIndex, id: date }))
   }
 
@@ -24,4 +25,4 @@ const AddQuestion = ({ formIndex }: AddQuestionProps) => {
   )
 }
 
-export default AddQuestion
+export default memo(QuestionAdd)

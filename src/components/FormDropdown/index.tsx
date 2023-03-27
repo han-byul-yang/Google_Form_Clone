@@ -54,13 +54,13 @@ const FormDropdown = ({ items, icons, selectedState, action }: FormDropdownProps
       </p>
       {isOpenDropdown && (
         <ul className={styles.dropdown} ref={targetRef} style={{ top: -(selectedIndex * 40) }}>
-          {items.map((answer, index) => {
+          {items.map((item, index) => {
             const typeKey = `typeKey-${index}`
             return (
               <li key={typeKey}>
-                <button type='button' onClick={() => handleAnswerDropdownClick(answer, index)}>
-                  {icons && icons(answer, styles)}
-                  <p>{answer}</p>
+                <button type='button' onClick={() => handleAnswerDropdownClick(item, index)}>
+                  {icons && icons(item, styles)}
+                  <p>{item}</p>
                 </button>
               </li>
             )

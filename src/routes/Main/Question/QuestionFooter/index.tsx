@@ -12,12 +12,12 @@ interface QuestionFooterProps {
 }
 
 const QuestionFooter = ({ formIndex }: QuestionFooterProps) => {
-  const questionInfos = useSelector((state: RootState) => state.question.questionInfos[formIndex])
-  const newIdQuestionInfos = { ...questionInfos, id: Date.now() } // handleCopyFormClick안에 넣기
+  const questionInfo = useSelector((state: RootState) => state.question.questionInfos[formIndex])
   const dispatch = useDispatch()
 
   const handleCopyFormClick = () => {
-    dispatch(copyQuestionInfo({ index: formIndex, questionInfos: newIdQuestionInfos }))
+    const newIdQuestionInfo = { ...questionInfo, id: Date.now() }
+    dispatch(copyQuestionInfo({ index: formIndex, questionInfos: newIdQuestionInfo }))
   }
 
   const handleDeleteFormClick = () => {
@@ -38,7 +38,7 @@ const QuestionFooter = ({ formIndex }: QuestionFooterProps) => {
         type='checkbox'
         className={styles.input}
         name={`${formIndex}`}
-        checked={questionInfos.essential}
+        checked={questionInfo.essential}
         onChange={handleEssentialFormChange}
       />
       <label htmlFor={`${formIndex}`} className={styles.label} />

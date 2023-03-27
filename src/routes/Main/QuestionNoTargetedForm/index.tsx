@@ -1,14 +1,18 @@
-import { QuestionInfo } from 'types/sliceStateType'
+import { memo } from 'react'
+import { useSelector } from 'react-redux'
+
+import { RootState } from 'store'
 import NoTargetedOption from './NoTargetedOption'
 
 import styles from './questionNoTargetedForm.module.scss'
 
 interface QuestionNoTargetedFormProps {
-  questionInfo: QuestionInfo
   formIndex: number
 }
 
-const QuestionNoTargetedForm = ({ questionInfo, formIndex }: QuestionNoTargetedFormProps) => {
+const QuestionNoTargetedForm = ({ formIndex }: QuestionNoTargetedFormProps) => {
+  const questionInfo = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+
   return (
     <form className={styles.noTargetedForm}>
       <p className={styles.questionTitle}>{questionInfo.title}</p>
@@ -16,4 +20,4 @@ const QuestionNoTargetedForm = ({ questionInfo, formIndex }: QuestionNoTargetedF
     </form>
   )
 }
-export default QuestionNoTargetedForm
+export default memo(QuestionNoTargetedForm)

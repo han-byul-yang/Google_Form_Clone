@@ -1,7 +1,8 @@
 import { ChangeEvent, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { questionTypes, questionTypeIcons } from 'utils/questionTypes'
+import questionTypeIcons from 'utils/questionTypeIcons'
+import questionTypeList from 'constants/questionTypeList'
 import { RootState } from 'store'
 import { addTitle, addType } from 'store/questionSlice'
 import FormDropdown from 'components/FormDropdown'
@@ -35,13 +36,13 @@ const Question = ({ formIndex }: QuestionProps) => {
           onChange={handleQuestionInputChange}
         />
         <FormDropdown
-          items={questionTypes}
+          items={questionTypeList}
           icons={questionTypeIcons}
           selectedState={questionType}
           action={dropdownAction}
         />
       </div>
-      <QuestionOption questionType={questionType} formIndex={formIndex} />
+      <QuestionOption formIndex={formIndex} />
       <QuestionFooter formIndex={formIndex} />
     </form>
   )

@@ -52,9 +52,6 @@ const questionSlice = createSlice({
     editOption: (state, action) => {
       const { index, option } = action.payload
       const optionIndex = state.questionInfos[index].options.findIndex((item) => item.name === option.name)
-      const optionsValues = state.questionInfos[index].options.map((infoOption) => infoOption.value)
-      if (optionIndex === -1) return
-      if (optionsValues.includes(option.value)) return
       state.questionInfos[index].options[optionIndex] = option
     },
     deleteOption: (state, action) => {
@@ -64,13 +61,11 @@ const questionSlice = createSlice({
     },
     addEtcOption: (state, action) => {
       const { index } = action.payload
-      const etcOption = { name: '기타', value: true }
-      state.questionInfos[index].etcOption = etcOption
+      state.questionInfos[index].etcOption.value = true
     },
     deleteEtcOption: (state, action) => {
       const { index } = action.payload
-      const etcOption = { name: '기타', value: false }
-      state.questionInfos[index].etcOption = etcOption
+      state.questionInfos[index].etcOption.value = false
     },
     setEssential: (state, action) => {
       const { index, essential } = action.payload
@@ -89,11 +84,11 @@ const questionSlice = createSlice({
       state.questionInfos[index].answer = ''
     },
     deleteAllAnswers: (state) => {
-      const deletedAnswers = state.questionInfos.map((info) => {
+      const answerDeletedInfos = state.questionInfos.map((info) => {
         if (typeof info.answer === 'string') return { ...info, answer: '', etcAnswer: '' }
         return { ...info, answer: [], etcAnswer: '' }
       })
-      state.questionInfos = deletedAnswers
+      state.questionInfos = answerDeletedInfos
     },
     deleteEtcAnswer: (state, action) => {
       const { index } = action.payload

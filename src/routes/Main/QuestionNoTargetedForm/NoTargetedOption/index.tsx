@@ -13,15 +13,15 @@ interface NoTargetedOptionProps {
 }
 
 const NoTargetedOption = ({ questionInfo, formIndex }: NoTargetedOptionProps) => {
-  const { type: answerType, options: answerOptions } = questionInfo
+  const { type: questionType, options: questionOptions } = questionInfo
 
   const noTargetedOptionComponents = {
-    단답형: <ShortText type='noTarget' answer='' />,
-    장문형: <LongText type='noTarget' answer='' />,
-    '객관식 질문': <Objective type='noTarget' formIndex={formIndex} options={answerOptions} />,
-    체크박스: <CheckBox type='noTarget' formIndex={formIndex} options={answerOptions} />,
-    드롭다운: <Dropdown type='noTarget' formIndex={formIndex} options={answerOptions} />,
-  }[answerType]
+    단답형: <ShortText type='noTarget' />,
+    장문형: <LongText type='noTarget' />,
+    '객관식 질문': <Objective type='noTarget' formIndex={formIndex} options={questionOptions} />,
+    체크박스: <CheckBox type='noTarget' formIndex={formIndex} options={questionOptions} />,
+    드롭다운: <Dropdown type='noTarget' formIndex={formIndex} options={questionOptions} />,
+  }[questionType]
 
   return <div className={styles.noTargetedOptionContainer}>{noTargetedOptionComponents}</div>
 }

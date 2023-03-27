@@ -8,18 +8,19 @@ import Dropdown from 'components/Options/ChoosingOptions/Dropdown'
 import LongText from 'components/Options/LongText'
 import Objective from 'components/Options/ChoosingOptions/Objective'
 import ShortText from 'components/Options/ShortText'
-import QuestionAdd from './QuestionAdd'
+import OptionAdd from './QuestionAdd'
 
 import styles from './questionOption.module.scss'
 
 interface QuestionOptionProps {
-  questionType: string
   formIndex: number
 }
 
-const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
+const QuestionOption = ({ formIndex }: QuestionOptionProps) => {
   const [sameOptionError, setSameOptionError] = useState({ place: '', error: false })
-  const { options: optionsInput } = useSelector((state: RootState) => state.question.questionInfos[formIndex])
+  const { type: questionType, options: optionsInput } = useSelector(
+    (state: RootState) => state.question.questionInfos[formIndex]
+  )
   const dispatch = useDispatch()
 
   const handleQuestionOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -73,7 +74,6 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
         options={optionsInput}
         sameOptionError={sameOptionError}
         handleQuestionOptionChange={handleQuestionOptionChange}
-        handleDeleteEtcClick={handleDeleteEtcClick}
         handleDeleteQuestionOptionClick={handleDeleteQuestionOptionClick}
       />
     ),
@@ -86,7 +86,7 @@ const QuestionOption = ({ questionType, formIndex }: QuestionOptionProps) => {
       ) : (
         <>
           {questionOptionComponents}
-          <QuestionAdd formIndex={formIndex} />
+          <OptionAdd formIndex={formIndex} />
         </>
       )}
     </div>

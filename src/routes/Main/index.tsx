@@ -6,7 +6,7 @@ import cx from 'classnames'
 import { RootState } from 'store'
 import Title from './Title'
 import Question from './Question'
-import AddQuestion from './AddQuestion'
+import QuestionAdd from './QuestionAdd'
 import QuestionNoTargetedForm from './QuestionNoTargetedForm'
 
 import { EyeIcon } from 'assets/svgs'
@@ -49,7 +49,7 @@ const Main = () => {
                   {targetedForm === questionInfo.id ? (
                     <Question formIndex={index} />
                   ) : (
-                    <QuestionNoTargetedForm questionInfo={questionInfo} formIndex={index} />
+                    <QuestionNoTargetedForm formIndex={index} />
                   )}
                 </li>
               )
@@ -57,7 +57,7 @@ const Main = () => {
           </ul>
         </div>
         <div className={styles.addQuestionContainer}>
-          <AddQuestion formIndex={formIndex} />
+          <QuestionAdd formIndex={formIndex} />
         </div>
       </div>
     </>
