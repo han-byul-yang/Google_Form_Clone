@@ -14,6 +14,7 @@ import styles from './preview.module.scss'
 const Preview = () => {
   const [firstErrorIndex, setFirstErrorIndex] = useState(-1)
   const [targetedFormIndex, setTargetedFormIndex] = useState(0)
+  const [toggleClickSubmit, setToggleClickSubmit] = useState(false)
   const { title, description } = useSelector((state: RootState) => state.title.titleInfo)
   const questionInfos = useSelector((state: RootState) => state.question.questionInfos)
   const dispatch = useDispatch()
@@ -39,7 +40,7 @@ const Preview = () => {
 
   useEffect(() => {
     if (firstErrorIndex !== -1) document.getElementById('scroll')?.scrollIntoView({ behavior: 'smooth' })
-  }, [firstErrorIndex])
+  }, [firstErrorIndex, toggleClickSubmit])
 
   const handleInsideClick = (index: number) => {
     setTargetedFormIndex(index)
@@ -55,6 +56,7 @@ const Preview = () => {
     if (!noAnswerErrors.length) navigate('/answer')
     else {
       setFirstErrorIndex(findFirstErrorIndex)
+      setToggleClickSubmit((prevState) => !prevState)
     }
   }
 
