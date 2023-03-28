@@ -14,7 +14,10 @@ interface FormDropdownProps {
     }
   ) => JSX.Element | undefined
   selectedState: string
-  action: any
+  action: (answer: string) => {
+    payload: void
+    type: 'questionSlice/setAnswer' | 'questionSlice/addType'
+  }
 }
 
 const FormDropdown = ({ items, icons, selectedState, action }: FormDropdownProps) => {

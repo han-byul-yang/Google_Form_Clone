@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 
-import { QuestionInfo } from 'types/sliceStateType'
 import { RootState } from 'store'
 import CheckBox from '../../../components/Options/ChoosingOptions/CheckBox'
 import LongText from '../../../components/Options/LongText'

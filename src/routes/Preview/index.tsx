@@ -51,9 +51,13 @@ const Preview = () => {
   }
 
   const handleSubmitClick = () => {
-    const noAnswerErrors = questionInfos.filter((info) => info.essential && !info.answer && !info.etcAnswer)
-    const findFirstErrorIndex = questionInfos.findIndex((info) => info.essential && !info.answer && !info.etcAnswer)
-    if (!noAnswerErrors.length) navigate('/answer')
+    const noAnswerErrors = questionInfos.some(
+      (info) => info.essential && (!info.answer || !info.answer.length) && !info.etcAnswer
+    )
+    const findFirstErrorIndex = questionInfos.findIndex(
+      (info) => info.essential && (!info.answer || !info.answer.length) && !info.etcAnswer
+    )
+    if (!noAnswerErrors) navigate('/answer')
     else {
       setFirstErrorIndex(findFirstErrorIndex)
       setToggleClickSubmit((prevState) => !prevState)
